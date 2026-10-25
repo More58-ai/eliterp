@@ -92,11 +92,12 @@
             letter-spacing: 1px;
         }
 
-        .lock-desc {
+      .lock-desc {
             font-size: 16px;
             color: #ff9999;
             max-width: 500px;
             line-height: 1.6;
+            margin-bottom: 25px;
         }
 
         /* ЕКРАН АВТОРИЗАЦІЇ */
@@ -620,11 +621,11 @@
     <div class="background-scene"></div>
     <div class="gradient-mask"></div>
 
-    <!-- ЕКРАН БЛОКУВАННЯ ПІД ЧАС ОБЗВОНУ -->
-    <div id="interview-lock-screen">
+   <div id="interview-lock-screen">
         <div class="lock-icon-box"><i class="fa-solid fa-user-lock"></i></div>
         <div class="lock-title" id="lock-screen-title">Тимчасовий обмежений доступ</div>
         <div class="lock-desc" id="lock-screen-desc">Для вас сайт тимчасово недоступний до закінчення обзвону.<br>Будь ласка, зачекайте завершення процедури адміністратором.</div>
+        <button id="btn-dismiss-lock" class="btn-auth-main" style="display: none; max-width: 320px;" onclick="dismissLockScreen()">Закрити та повернутися до сайту</button>
     </div>
 
     <!-- ЕКРАН АВТОРИЗАЦІЇ -->
@@ -1235,13 +1236,17 @@
                     document.getElementById('interview-control-area').style.display = isHighAdmin ? 'block' : 'none';
 
                     const lockScreen = document.getElementById('interview-lock-screen');
+                    const dismissBtn = document.getElementById('btn-dismiss-lock');
+
                     if (u.interview_status === 'passed') {
                         lockScreen.style.display = 'flex';
+                        dismissBtn.style.display = 'block';
                         document.getElementById('lock-screen-title').innerText = "Вітаємо!";
                         document.getElementById('lock-screen-desc').innerText = "Вітаю, ви успішно пройшли обзвон!";
                         document.querySelector('.lock-icon-box').innerHTML = '<i class="fa-solid fa-circle-check" style="color:#2ecc71;"></i>';
                     } else if (u.interview_status === 'failed') {
                         lockScreen.style.display = 'flex';
+                        dismissBtn.style.display = 'block';
                         document.getElementById('lock-screen-title').innerText = "Результат обзвону";
                         document.getElementById('lock-screen-desc').innerText = "На жаль, ви не пройшли обзвон.";
                         document.querySelector('.lock-icon-box').innerHTML = '<i class="fa-solid fa-circle-xmark" style="color:#e74c3c;"></i>';
@@ -1249,11 +1254,13 @@
                         get(child(ref(db), 'active_interview')).then(intSnap => {
                             if (intSnap.exists() && intSnap.val().candidate === nick) {
                                 lockScreen.style.display = 'flex';
+                                dismissBtn.style.display = 'none';
                                 document.getElementById('lock-screen-title').innerText = "Тимчасовий обмежений доступ";
                                 document.getElementById('lock-screen-desc').innerText = "Для вас сайт тимчасово недоступний до закінчення обзвону.";
                                 document.querySelector('.lock-icon-box').innerHTML = '<i class="fa-solid fa-user-lock" style="color:#ff3333;"></i>';
                             } else if (!u.interview_status || u.interview_status === 'none') {
                                 lockScreen.style.display = 'none';
+                                dismissBtn.style.display = 'none';
                             }
                         });
                     }
@@ -1491,6 +1498,12 @@
     </script>
 
     <script>
+      window.dismissLockScreen = async function() {
+            if (currentUserNick) {
+                await set(ref(db, `users/${currentUserNick}/interview_status`), 'none');
+                document.getElementById('interview-lock-screen').style.display = 'none';
+            }
+        }
         function openSupportModal() { document.getElementById('supportModal').style.display = 'flex'; }
         function closeSupportModal() { document.getElementById('supportModal').style.display = 'none'; }
         function closeSupportModalOutside(e) { if (e.target.id === 'supportModal') closeSupportModal(); }
