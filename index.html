@@ -1235,35 +1235,20 @@
                     document.getElementById('btn-give-role-main').style.display = isTechAdmin ? 'inline-flex' : 'none';
                     document.getElementById('interview-control-area').style.display = isHighAdmin ? 'block' : 'none';
 
-                    const lockScreen = document.getElementById('interview-lock-screen');
+                  const lockScreen = document.getElementById('interview-lock-screen');
                     const dismissBtn = document.getElementById('btn-dismiss-lock');
+                    if(dismissBtn) dismissBtn.style.display = 'none';
 
-                    if (u.interview_status === 'passed') {
-                        lockScreen.style.display = 'flex';
-                        dismissBtn.style.display = 'block';
-                        document.getElementById('lock-screen-title').innerText = "Вітаємо!";
-                        document.getElementById('lock-screen-desc').innerText = "Вітаю, ви успішно пройшли обзвон!";
-                        document.querySelector('.lock-icon-box').innerHTML = '<i class="fa-solid fa-circle-check" style="color:#2ecc71;"></i>';
-                    } else if (u.interview_status === 'failed') {
-                        lockScreen.style.display = 'flex';
-                        dismissBtn.style.display = 'block';
-                        document.getElementById('lock-screen-title').innerText = "Результат обзвону";
-                        document.getElementById('lock-screen-desc').innerText = "На жаль, ви не пройшли обзвон.";
-                        document.querySelector('.lock-icon-box').innerHTML = '<i class="fa-solid fa-circle-xmark" style="color:#e74c3c;"></i>';
-                    } else {
-                        get(child(ref(db), 'active_interview')).then(intSnap => {
-                            if (intSnap.exists() && intSnap.val().candidate === nick) {
-                                lockScreen.style.display = 'flex';
-                                dismissBtn.style.display = 'none';
-                                document.getElementById('lock-screen-title').innerText = "Тимчасовий обмежений доступ";
-                                document.getElementById('lock-screen-desc').innerText = "Для вас сайт тимчасово недоступний до закінчення обзвону.";
-                                document.querySelector('.lock-icon-box').innerHTML = '<i class="fa-solid fa-user-lock" style="color:#ff3333;"></i>';
-                            } else if (!u.interview_status || u.interview_status === 'none') {
-                                lockScreen.style.display = 'none';
-                                dismissBtn.style.display = 'none';
-                            }
-                        });
-                    }
+                    get(child(ref(db), 'active_interview')).then(intSnap => {
+                        if (intSnap.exists() && intSnap.val().candidate === nick) {
+                            lockScreen.style.display = 'flex';
+                            document.getElementById('lock-screen-title').innerText = "Тимчасовий обмежений доступ";
+                            document.getElementById('lock-screen-desc').innerText = "Для вас сайт тимчасово недоступний до закінчення обзвону.";
+                            document.querySelector('.lock-icon-box').innerHTML = '<i class="fa-solid fa-user-lock" style="color:#ff3333;"></i>';
+                        } else {
+                            lockScreen.style.display = 'none';
+                        }
+                    });
                 }
             });
 
