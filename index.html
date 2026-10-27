@@ -1225,7 +1225,7 @@
     <!-- SCRIPTS -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/13.1.0/firebase-app.js";
-        import { getDatabase, ref, get, set, child, onValue, remove, push } from "https://www.gstatic.com/firebasejs/13.1.0/firebase-database.js";
+        import { getDatabase, ref, get, set, child, onValue, remove, push, onDisconnect } from "https://www.gstatic.com/firebasejs/13.1.0/firebase-database.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyAjpHL-aaOQPZGK1CQHlrKvhEtOrYrsbvI",
@@ -1341,45 +1341,67 @@
                 switchAuthMode('login');
             } catch (e) { console.error(e); }
         }
+        // ПРИСУТНІСТЬ: гравець в онлайні лише поки вкладка реально відкрита й активна
+function startPresence(nick) {
+    const meRef = ref(db, `online/${nick}`);
+    const beat = () => set(meRef, { nickname: nick, time: Date.now() });
+    const goOffline = () => remove(meRef);
+
+    onDisconnect(meRef).remove();          // закрив вкладку або пропав інтернет
+    if (!document.hidden) beat();
+    setInterval(() => { if (!document.hidden) beat(); }, 25000);   // сигнал "я тут"
+
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) goOffline();  // перейшов на іншу вкладку або згорнув
+        else { onDisconnect(meRef).remove(); beat(); }
+    });
+    window.addEventListener('pagehide', goOffline);
+}
 
         function initSession(nick) {
             document.getElementById('auth-screen').style.display = 'none';
-            set(ref(db, `online/${nick}`), { nickname: nick, time: Date.now() });
+            startPresence(nick);
             initFactionFeatures(nick);
 
             // СПИСОК ОНЛАЙН ГРАВЦІВ
-            onValue(ref(db, 'online'), async (snapshot) => {
-                const container = document.getElementById('online-users-container');
-                container.innerHTML = '';
-                if (snapshot.exists()) {
-                    const onlineData = snapshot.val();
-                    const usersSnap = await get(child(ref(db), 'users'));
-                    const allUsers = usersSnap.exists() ? usersSnap.val() : {};
+           // СПИСОК ОНЛАЙН ГРАВЦІВ (лише ті, хто зараз реально на сайті)
+let onlineData = {}, allUsersCache = {};
+const ONLINE_TTL = 70000;
 
-                    Object.keys(onlineData).forEach((userKey) => {
-                        const u = allUsers[userKey];
-                        if (u) {
-                            const roles = Array.isArray(u.roles) ? u.roles : ['player'];
-                            let rolesHtml = '';
-                            roles.forEach(r => {
-                                const rm = ROLE_MAP[r.toLowerCase().trim()] || ROLE_MAP['player'];
-                                rolesHtml += `<span class="role-badge ${rm.c}">${rm.icon} ${rm.l}</span>`;
-                            });
+function renderOnline() {
+    const container = document.getElementById('online-users-container');
+    const now = Date.now();
+    container.innerHTML = '';
+    Object.keys(onlineData).forEach(userKey => {
+        const o = onlineData[userKey];
+        if (!o || now - o.time > ONLINE_TTL) return;   // застарілі записи ігноруємо
+        const u = allUsersCache[userKey];
+        if (!u) return;
+        const roles = Array.isArray(u.roles) ? u.roles : ['player'];
+        let rolesHtml = '';
+        roles.forEach(r => {
+            const rm = ROLE_MAP[r.toLowerCase().trim()] || ROLE_MAP['player'];
+            rolesHtml += `<span class="role-badge ${rm.c}">${rm.icon} ${rm.l}</span>`;
+        });
+        const div = document.createElement('div');
+        div.className = 'online-user-item';
+        div.innerHTML = `
+            <img src="${u.avatar || DEFAULT_AVATAR}" class="online-avatar">
+            <div class="online-info">
+                <div class="online-nick">${u.nickname}</div>
+                <div>${rolesHtml}</div>
+            </div>`;
+        container.appendChild(div);
+    });
+}
 
-                            const div = document.createElement('div');
-                            div.className = 'online-user-item';
-                            div.innerHTML = `
-                                <img src="${u.avatar || DEFAULT_AVATAR}" class="online-avatar">
-                                <div class="online-info">
-                                    <div class="online-nick">${u.nickname}</div>
-                                    <div>${rolesHtml}</div>
-                                </div>
-                            `;
-                            container.appendChild(div);
-                        }
-                    });
-                }
-            });
+onValue(ref(db, 'online'), async (snapshot) => {
+    onlineData = snapshot.exists() ? snapshot.val() : {};
+    const usersSnap = await get(child(ref(db), 'users'));
+    allUsersCache = usersSnap.exists() ? usersSnap.val() : {};
+    renderOnline();
+});
+setInterval(renderOnline, 15000);   // самоочищення списку
 
             // ДАНІ ПОТОЧНОГО ЮЗЕРА
             onValue(ref(db, `users/${nick}`), (snapshot) => {
