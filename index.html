@@ -675,12 +675,74 @@
 .my-group-title{font-size:13px;font-weight:900;text-transform:uppercase;margin:16px 0 8px;display:flex;align-items:center;gap:8px}
 .reply-box{background:rgba(0,114,255,.1);border-left:3px solid #0072ff;border-radius:8px;padding:10px 12px;font-size:12px;margin-top:8px}
 .reason-box{background:rgba(231,76,60,.12);border:1px solid #e74c3c;border-radius:12px;padding:14px;margin:15px 0;text-align:left;font-size:13px;color:#ffb3ab}
+.news-title{font-size:15px;font-weight:900;text-transform:uppercase;color:var(--gold-light);display:flex;align-items:center;gap:10px;margin-bottom:15px}
+.news-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.news-wide{grid-column:1/-1}
+.news-card{background:var(--card-bg);border:1px solid var(--border-color);border-radius:20px;padding:20px;backdrop-filter:blur(10px)}
+.news-card h3{font-size:13px;font-weight:800;text-transform:uppercase;color:var(--gold);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid rgba(243,168,46,.2)}
+.news-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 12px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;margin-bottom:10px}
+.news-mini{display:flex;align-items:center;gap:10px}
+.news-arrow{color:var(--gold)}
+.news-faction{font-size:12px;font-weight:800;color:var(--gold-light)}
+.news-by{font-size:11px;color:#aaa;display:flex;align-items:center;gap:8px}
+.news-empty{color:#888;font-size:12px;text-align:center;padding:14px}
+.act-label{font-size:11px;font-weight:700;color:#7a7a7a;text-transform:uppercase;margin-bottom:4px}
+.act-big{font-size:30px;font-weight:900;color:var(--gold-light)}
+.act-mid{font-size:18px;font-weight:800;color:#fff}
+@media (max-width:950px){.news-grid{grid-template-columns:1fr}}
 
         @media (max-width: 950px) {
             .main-wrapper { grid-template-columns: 1fr; }
             .stats-bar { grid-template-columns: repeat(2, 1fr); }
             .nav-links { display: none; }
         }
+        /* ===== СПОВІЩЕННЯ, ЖУРНАЛ, ІСТОРІЯ ===== */
+input,textarea{user-select:text}
+*{-webkit-tap-highlight-color:transparent}
+#btn-tech-support-main,#btn-review-apps{position:relative}
+.notif-dot{position:absolute;top:-8px;right:-8px;min-width:22px;height:22px;padding:0 5px;border-radius:11px;background:#ff3b30;color:#fff;font-size:11px;font-weight:900;display:flex;align-items:center;justify-content:center;border:2px solid #0c0a08;box-shadow:0 0 10px rgba(255,59,48,.9);animation:dotPulse 1.4s infinite;z-index:5}
+@keyframes dotPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.18)}}
+.btn-journal{background:linear-gradient(135deg,#8e44ad,#5b2c83);box-shadow:0 4px 15px rgba(142,68,173,.5)}
+.btn-ihistory{background:linear-gradient(135deg,#ff7700,#ff3300);box-shadow:0 4px 15px rgba(255,119,0,.5)}
+.jf-tab{padding:8px 14px;border-radius:10px;font-weight:800;font-size:11px;text-transform:uppercase;cursor:pointer;background:transparent;border:2px solid var(--gold);color:var(--gold);opacity:.6}
+.jf-tab.active{opacity:1;background:var(--gold);color:#0c0a08}
+.log-time{margin-left:auto;font-size:10px;color:#888;white-space:nowrap}
+
+/* ===== МОБІЛЬНА АДАПТАЦІЯ ===== */
+@media (max-width:950px){
+  .nav-links{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:1500;justify-content:space-around;gap:0;padding:6px 4px calc(6px + env(safe-area-inset-bottom));background:rgba(12,10,8,.96);backdrop-filter:blur(15px);border-top:1px solid rgba(243,168,46,.25)}
+  .nav-links a{flex:1;text-align:center;padding:10px 4px;font-size:11px;border-radius:10px}
+  .nav-links a.active{background:rgba(243,168,46,.12);color:var(--gold-light)}
+  .main-wrapper{margin:84px auto 30px;padding:0 3% 90px}
+  .floating-chat-btn{bottom:84px;right:16px;width:54px;height:54px;font-size:21px}
+}
+@media (max-width:600px){
+  header{padding:10px 4%}
+  .header-logo-text{font-size:16px;letter-spacing:1px}
+  #header-roles-box{display:none!important}
+  #header-username{max-width:90px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .hero-banner{padding:26px 16px;border-radius:18px}
+  .hero-desc{font-size:13px;margin-bottom:20px}
+  .hero-buttons button,.admin-action-btns-row button{flex:1 1 100%;justify-content:center}
+  .modal-overlay{padding:10px}
+  .modal-box{padding:24px 16px;border-radius:18px;max-height:92vh;overflow-y:auto}
+  .modal-title{font-size:18px}
+  .modal-close{top:8px;right:12px;font-size:28px}
+  .rules-content-box,.factions-scroll-list,.admin-cards-list,.candidate-select-list{max-height:52vh!important}
+  .auth-input{font-size:16px}
+  .auth-container{padding:28px 18px}
+  .app-head{padding:12px}.app-sticker{font-size:28px}.app-head-title{font-size:13px}.app-head-sub{font-size:8px;letter-spacing:1.5px}
+  .app-actions{flex-direction:column}
+  .tech-actions button{flex:1 1 45%}
+  .rv-tab{flex:1 1 30%;padding:10px 4px;font-size:10px}
+  .interview-control-box{flex-direction:column;gap:12px;text-align:center}
+  .interview-top-row{flex-direction:column;gap:12px}
+  .interview-actions-row button{flex:1 1 100%}
+  .interview-result-choice-box{flex-direction:column}
+  .test-question-item{flex-direction:column;align-items:flex-start}
+  .admin-card-item{flex-direction:column;align-items:flex-start;gap:10px}
+  .lock-title{font-size:20px}
+}
     </style>
 </head>
 <body>
@@ -781,6 +843,8 @@
                         <i class="fa-solid fa-headset"></i> Підтримка (<span id="support-requests-count">0</span>)
                     </button>
                     <button class="btn-review-panel" id="btn-review-apps" onclick="openReviewModal()"><i class="fa-solid fa-clipboard-check"></i> Перевірка анкет у фракцію</button>
+                    <button class="btn-review-panel btn-journal" id="btn-journal" onclick="openJournal()"><i class="fa-solid fa-book"></i> Журнал дій</button>
+<button class="btn-review-panel btn-ihistory" id="btn-ihistory" onclick="openInterviewHistory()"><i class="fa-solid fa-clock-rotate-left"></i> Історія обзвонів</button>
                 </div>
 
                 <!-- ДИНАМІЧНИЙ БЛОК ОБЗВОНУ -->
@@ -819,25 +883,16 @@
                 </div>
             </section>
 
-            <!-- СТАТИСТИКА БАР -->
-            <div class="stats-bar">
-                <div class="stat-card">
-                    <div class="stat-label">Нікнейм</div>
-                    <div class="stat-value" id="stat-nick">---</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-label">RP-ім'я</div>
-                    <div class="stat-value">123123</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-label">Ліцензія на зброю</div>
-                    <div class="stat-value">немає</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-label">Водійські права</div>
-                    <div class="stat-value">немає</div>
-                </div>
-            </div>
+           <!-- ОСТАННІ НОВИНИ -->
+<div class="news-section">
+    <div class="news-title"><i class="fa-solid fa-newspaper"></i> Останні новини</div>
+    <span id="stat-nick" style="display:none"></span>
+    <div class="news-grid">
+        <div class="news-card news-wide"><h3>📝 Останні анкети у фракції</h3><div id="news-apps"></div></div>
+        <div class="news-card"><h3>🆕 Нові гравці</h3><div id="news-users"></div></div>
+        <div class="news-card"><h3>⏱️ Ваша активність</h3><div id="news-activity"></div></div>
+    </div>
+</div>
 
             <!-- КАРТКИ ВНИЗУ -->
             <div class="cards-grid">
@@ -905,7 +960,7 @@
                 <label>Опишіть вашу проблему</label>
                 <textarea id="tech-problem-input" class="auth-input" rows="4" placeholder="Що трапилося? Детально опишіть проблему..." style="resize: none;"></textarea>
             </div>
-            <button class="btn-my-requests" onclick="openMyRequests()"><i class="fa-solid fa-inbox"></i> Мої звернення</button>
+           <button class="btn-my-requests" onclick="openMyRequests(); markRepliesSeen()"><i class="fa-solid fa-inbox"></i> Мої звернення</button>
             <button class="btn-auth-main" onclick="submitTechSupportRequest()">Надіслати звернення</button>
         </div>
     </div>
@@ -1001,6 +1056,8 @@
             <button class="modal-close" onclick="closeRulesModal()">&times;</button>
             <div class="modal-icon"><i class="fa-solid fa-book-open"></i></div>
             <div class="modal-title">Звід правил проєкту Elite RP</div>
+            <input type="text" id="rules-search" class="auth-input" placeholder="🔍 Пошук по правилах: RDM, КК-201, штраф..." oninput="searchRules()" style="margin-bottom:12px">
+<div id="rules-empty" class="news-empty" style="display:none">Нічого не знайдено</div>
             <div class="rules-content-box">
                 <div class="rule-category">
                     <h3>1. Регламент адміністрації</h3>
@@ -1221,6 +1278,21 @@
   <div class="modal-icon" id="dec-icon" style="font-size:64px"></div><div class="modal-title" id="dec-title"></div>
   <div class="modal-text" id="dec-text" style="text-align:center;font-size:15px"></div><div id="dec-reason"></div>
   <button class="btn-auth-main" onclick="closeDecision()">Зрозуміло</button></div></div>
+  <div id="journalModal" class="modal-overlay" onclick="if(event.target===this)closeM('journalModal')">
+ <div class="modal-box" style="max-width:760px"><button class="modal-close" onclick="closeM('journalModal')">&times;</button>
+  <div class="modal-icon"><i class="fa-solid fa-book"></i></div><div class="modal-title">Журнал дій</div>
+  <div class="rv-tabs">
+   <button class="jf-tab active" data-f="all" onclick="setJournalFilter('all')">Усі</button>
+   <button class="jf-tab" data-f="role" onclick="setJournalFilter('role')">Ролі</button>
+   <button class="jf-tab" data-f="interview" onclick="setJournalFilter('interview')">Обзвони</button>
+   <button class="jf-tab" data-f="application" onclick="setJournalFilter('application')">Анкети</button>
+  </div>
+  <div class="rules-content-box" id="journal-list" style="max-height:400px;gap:0"></div></div></div>
+
+<div id="historyModal" class="modal-overlay" onclick="if(event.target===this)closeM('historyModal')">
+ <div class="modal-box" style="max-width:760px"><button class="modal-close" onclick="closeM('historyModal')">&times;</button>
+  <div class="modal-icon"><i class="fa-solid fa-clock-rotate-left"></i></div><div class="modal-title">Історія обзвонів</div>
+  <div class="rules-content-box" id="history-list" style="max-height:430px;gap:0"></div></div></div>
 
     <!-- SCRIPTS -->
     <script type="module">
@@ -1278,6 +1350,93 @@
             { text: "Які санкції за неправильне паркування?", score: 0.5 },
             { text: "Яке покарання за VDM?", score: 1.0 }
         ];
+        // ================= ОСТАННІ НОВИНИ =================
+let newsUsers = {}, newsApps = {}, newsActivity = null;
+
+const fmtDate = t => new Date(t).toLocaleString('uk-UA', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+function fmtDuration(sec) {
+    sec = Math.floor(sec || 0);
+    const d = Math.floor(sec / 86400), h = Math.floor(sec % 86400 / 3600), m = Math.floor(sec % 3600 / 60);
+    return (d ? d + ' д ' : '') + h + ' год ' + m + ' хв';
+}
+function fmtAgo(t) {
+    const s = Math.floor((Date.now() - t) / 1000);
+    if (s < 90) return 'щойно';
+    if (s < 3600) return Math.floor(s / 60) + ' хв тому';
+    if (s < 86400) return Math.floor(s / 3600) + ' год тому';
+    return fmtDate(t);
+}
+function accountMini(nick) {
+    const u = newsUsers[nick];
+    return `<img src="${esc((u && u.avatar) || DEFAULT_AVATAR)}" class="online-avatar">
+        <div class="online-info"><div class="online-nick">${esc(nick)}</div><div>${u ? rolesHtmlOf(u.roles) : ''}</div></div>`;
+}
+
+function renderNews() {
+    const appsBox = document.getElementById('news-apps'), usersBox = document.getElementById('news-users');
+    if (!appsBox || !usersBox) return;
+
+    // 1) останні анкети (з усіх фракцій)
+    const list = [];
+    Object.keys(newsApps).forEach(fk => Object.keys(newsApps[fk] || {}).forEach(id => list.push(newsApps[fk][id])));
+    list.sort((a, b) => b.time - a.time);
+    appsBox.innerHTML = list.slice(0, 5).map(a => {
+        const st = a.status || 'pending';
+        const by = (st === 'approved' || st === 'rejected')
+            ? `<div class="news-by">${st === 'approved' ? 'Схвалив' : 'Відхилив'}: ${a.decidedBy ? `<div class="news-mini">${accountMini(a.decidedBy)}</div>` : '<b>—</b>'}</div>` : '';
+        return `<div class="news-row">
+            <div class="news-mini">${accountMini(a.applicant)}</div>
+            <div class="news-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+            <div class="news-faction">${esc(a.factionName)}</div>
+            ${stBadge(st)}${by}</div>`;
+    }).join('') || '<div class="news-empty">Анкет ще не було</div>';
+
+    // 2) п'ять останніх зареєстрованих
+    const recent = Object.keys(newsUsers).map(k => ({ k, u: newsUsers[k] }))
+        .filter(x => x.u.createdAt).sort((a, b) => b.u.createdAt - a.u.createdAt).slice(0, 5);
+    usersBox.innerHTML = recent.map(x => `<div class="news-row">
+        <div class="news-mini">${accountMini(x.k)}</div>
+        <div class="news-by" style="margin-left:auto">${fmtDate(x.u.createdAt)}</div></div>`).join('')
+        || '<div class="news-empty">Поки немає даних</div>';
+}
+
+function renderActivity() {
+    const box = document.getElementById('news-activity');
+    if (!box) return;
+    const a = newsActivity || {};
+    box.innerHTML = `<div class="act-label">Загалом на сайті</div><div class="act-big">${fmtDuration(a.totalSeconds)}</div>
+        <div class="act-label" style="margin-top:14px">Остання активність</div><div class="act-mid">${a.lastActive ? fmtAgo(a.lastActive) : '—'}</div>`;
+}
+
+function initNews(nick) {
+    onValue(ref(db, 'users'), s => { newsUsers = s.val() || {}; renderNews(); });
+    onValue(ref(db, 'faction_applications'), s => { newsApps = s.val() || {}; renderNews(); });
+    onValue(ref(db, `activity/${nick}`), s => { newsActivity = s.val(); renderActivity(); });
+}
+
+// Облік часу: рахується лише коли вкладка відкрита й на екрані
+function startActivityTracking(nick) {
+    const aRef = ref(db, `activity/${nick}`);
+    let base = 0, ready = false, visibleSince = document.hidden ? null : Date.now();
+
+    get(aRef).then(s => { base = s.exists() ? Number(s.val().totalSeconds) || 0 : 0; ready = true; });
+
+    const flush = () => {
+        if (!ready || visibleSince === null) return;
+        const now = Date.now();
+        base += Math.min(now - visibleSince, 120000) / 1000;   // захист від "сну" комп'ютера
+        visibleSince = now;
+        set(aRef, { totalSeconds: Math.round(base), lastActive: now });
+    };
+
+    setInterval(flush, 30000);
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) { flush(); visibleSince = null; }
+        else visibleSince = Date.now();
+    });
+    window.addEventListener('pagehide', flush);
+}
+
 
         let currentUserNick = localStorage.getItem('elite_rp_user');
         let interviewTimerInterval = null;
@@ -1331,6 +1490,7 @@
                     nickname: nick,
                     password: pass1,
                     age: age,
+                    createdAt: Date.now(),
                     roles: ['player'],
                     interview_status: 'none',
                     avatar: DEFAULT_AVATAR,
@@ -1347,6 +1507,9 @@
             document.getElementById('auth-screen').style.display = 'none';
             set(ref(db, `online/${nick}`), { nickname: nick, time: Date.now() });
             initFactionFeatures(nick);
+            initNews(nick);
+startActivityTracking(nick);
+initExtras(nick);
 
             // СПИСОК ОНЛАЙН ГРАВЦІВ
             onValue(ref(db, 'online'), async (snapshot) => {
@@ -1717,11 +1880,11 @@ async function renderReview() {
         if (a.status === 'pending') {
             card.querySelector('.b-ok').onclick = async () => {
                 const p = `faction_applications/${revF.key}/${a.id}`;
-                await set(ref(db, `${p}/notified`), false); await set(ref(db, `${p}/status`), 'approved'); renderReview();
+                await set(ref(db, `${p}/decidedBy`), currentUserNick); await set(ref(db, `${p}/notified`), false); await set(ref(db, `${p}/status`), 'approved'); logAction('application', a.applicant, 'Схвалено анкету у «' + revF.name + '»'); renderReview();
             };
             card.querySelector('.b-reject').onclick = () => promptText('Причина відхилення анкети', 'Вкажіть причину, її побачить гравець...', true, async reason => {
                 const p = `faction_applications/${revF.key}/${a.id}`;
-                await set(ref(db, `${p}/reason`), reason); await set(ref(db, `${p}/notified`), false); await set(ref(db, `${p}/status`), 'rejected'); renderReview();
+                await set(ref(db, `${p}/reason`), reason); await set(ref(db, `${p}/decidedBy`), currentUserNick); await set(ref(db, `${p}/notified`), false); await set(ref(db, `${p}/status`), 'rejected'); logAction('application', a.applicant, 'Відхилено анкету у «' + revF.name + '». Причина: ' + reason); renderReview();
             });
         }
         box.appendChild(card);
@@ -1760,6 +1923,7 @@ window.openTechSupportRequestsModal = async function() {
         on('ok', async () => { await set(ref(db, `tech_support/${key}/status`), 'approved'); openTechSupportRequestsModal(); });
         on('rep', () => promptText('Відповідь на звернення', 'Напишіть відповідь гравцю...', true, async text => {
             await set(ref(db, `tech_support/${key}/reply`), text);
+            await set(ref(db, `tech_support/${key}/replySeen`), false);
             await set(ref(db, `tech_support/${key}/status`), 'replied');
             openTechSupportRequestsModal();
         }));
@@ -1861,6 +2025,7 @@ window.openMyRequests = async function() {
             }
 
             await set(userRef, roles);
+logAction('role', targetUser, (roles.includes(roleKey) ? 'Видано роль: ' : 'Знято роль: ') + ROLE_MAP[roleKey].l);
         }
 
         window.closeManageRolesModal = function() { document.getElementById('manageRolesModal').style.display = 'none'; }
@@ -2010,6 +2175,119 @@ window.openMyRequests = async function() {
                 location.reload();
             }
         }
+        // ================= СПОВІЩЕННЯ / ЖУРНАЛ / ІСТОРІЯ ОБЗВОНІВ =================
+function setDot(el, n) {
+    if (!el) return;
+    let d = el.querySelector('.notif-dot');
+    if (!n) { if (d) d.remove(); return; }
+    if (!d) { d = document.createElement('span'); d.className = 'notif-dot'; el.appendChild(d); }
+    d.textContent = n > 9 ? '9+' : n;
+}
+
+function initExtras(nick) {
+    // техпідтримка: адміну крапка з кількістю нових, гравцю крапка про нову відповідь
+    onValue(ref(db, 'tech_support'), s => {
+        const list = Object.values(s.val() || {});
+        setDot(document.getElementById('btn-tech-support-main'), list.filter(r => !r.status || r.status === 'pending').length);
+        setDot(document.querySelector('.floating-chat-btn'), list.filter(r => r.nickname === nick && r.reply && r.replySeen === false).length);
+    });
+    // анкети: лідеру крапка з кількістю заявок на розгляді
+    onValue(ref(db, 'faction_applications'), s => {
+        let n = 0;
+        Object.values(s.val() || {}).forEach(f => Object.values(f || {}).forEach(a => { if (a.status === 'pending') n++; }));
+        setDot(document.getElementById('btn-review-apps'), n);
+    });
+    // хто бачить журнал та історію
+    onValue(ref(db, `users/${nick}/roles`), s => {
+        const r = s.exists() ? (Array.isArray(s.val()) ? s.val() : [s.val()]) : [];
+        const has = list => r.some(x => list.includes(x));
+        document.getElementById('btn-ihistory').style.display =
+            has(['trainee','junioradmin','admin','senioradmin','headadmin','deputyheadadmin','deputyowner','techadmin','owner']) ? 'inline-flex' : 'none';
+        document.getElementById('btn-journal').style.display =
+            has(['admin','senioradmin','headadmin','deputyheadadmin','deputyowner','techadmin','owner']) ? 'inline-flex' : 'none';
+    });
+}
+
+window.markRepliesSeen = async function() {
+    const all = (await get(ref(db, 'tech_support'))).val() || {};
+    for (const k of Object.keys(all)) {
+        const r = all[k];
+        if (r.nickname === currentUserNick && r.reply && r.replySeen === false) await set(ref(db, `tech_support/${k}/replySeen`), true);
+    }
+};
+
+// ----- Журнал дій -----
+window.logAction = function(type, target, text) {
+    push(ref(db, 'action_log'), { time: Date.now(), actor: currentUserNick || '?', type, target: target || '', text });
+};
+
+let journalFilter = 'all', journalCache = [];
+window.openJournal = async function() {
+    showM('journalModal');
+    $('journal-list').innerHTML = '<div class="news-empty">Завантаження...</div>';
+    const snap = await get(ref(db, 'action_log'));
+    journalCache = Object.values(snap.val() || {}).sort((a, b) => b.time - a.time).slice(0, 150);
+    renderJournal();
+};
+window.setJournalFilter = f => { journalFilter = f; renderJournal(); };
+function renderJournal() {
+    document.querySelectorAll('.jf-tab').forEach(b => b.classList.toggle('active', b.dataset.f === journalFilter));
+    const ICON = { role: ['fa-user-gear', '#ff7700'], interview: ['fa-headset', '#0072ff'], application: ['fa-file-signature', '#13a8b3'] };
+    const rows = journalCache.filter(l => journalFilter === 'all' || l.type === journalFilter).map(l => {
+        const ic = ICON[l.type] || ['fa-circle-info', '#aaa'];
+        return `<div class="news-row">
+            <i class="fa-solid ${ic[0]}" style="color:${ic[1]};font-size:18px;width:24px;text-align:center"></i>
+            <div style="flex:1;min-width:180px;font-size:12px"><b style="color:var(--gold-light)">${esc(l.actor)}</b>${l.target ? ` → <b>${esc(l.target)}</b>` : ''}
+                <div style="color:#bbb;margin-top:3px">${esc(l.text)}</div></div>
+            <div class="log-time">${new Date(l.time).toLocaleString('uk-UA')}</div></div>`;
+    });
+    $('journal-list').innerHTML = rows.join('') || '<div class="news-empty">Записів немає</div>';
+}
+
+// ----- Історія обзвонів -----
+window.openInterviewHistory = async function() {
+    showM('historyModal');
+    const box = $('history-list'); box.innerHTML = '<div class="news-empty">Завантаження...</div>';
+    const snap = await get(ref(db, 'interview_history'));
+    const list = Object.values(snap.val() || {}).sort((a, b) => b.time - a.time).slice(0, 100);
+    box.innerHTML = list.map(h => {
+        const ok = h.verdict === 'passed';
+        const score = (h.max != null && h.max > 0)
+            ? `${Number(h.earned).toFixed(1)} / ${Number(h.max).toFixed(1)} (${Math.round(h.earned / h.max * 100)}%)` : 'тест не проводився';
+        const dur = h.duration != null ? `${Math.floor(h.duration / 60)} хв ${h.duration % 60} с` : '—';
+        return `<div class="news-row">
+            <div style="flex:1;min-width:170px">
+                <div class="online-nick"><i class="fa-solid fa-user" style="color:var(--gold)"></i> ${esc(h.candidate)}</div>
+                <div class="news-by" style="margin-top:3px">Проводив: <b>${esc(h.interviewer)}</b></div></div>
+            <div style="font-size:12px;color:#ddd"><i class="fa-solid fa-star" style="color:var(--gold)"></i> ${score}<br>
+                <span style="color:#888"><i class="fa-regular fa-clock"></i> ${dur}</span></div>
+            <div style="text-align:right">
+                <span class="st-badge ${ok ? 'st-approved' : 'st-rejected'}"><i class="fa-solid ${ok ? 'fa-circle-check' : 'fa-circle-xmark'}"></i> ${ok ? 'Пройдено' : 'Не пройдено'}</span>
+                <div class="log-time" style="margin-top:4px">${new Date(h.time).toLocaleString('uk-UA')}</div></div></div>`;
+    }).join('') || '<div class="news-empty">Обзвонів ще не було</div>';
+};
+
+// Завершення обзвону: тепер зберігає історію й пише в журнал
+window.setInterviewVerdict = async function(verdict) {
+    const intSnap = await get(child(ref(db), 'active_interview'));
+    if (!intSnap.exists()) return;
+    const iv = intSnap.val();
+    const boxes = document.querySelectorAll('.test-checkbox-input');
+    let earned = null, max = null;
+    if (boxes.length) {
+        earned = 0; max = 0;
+        boxes.forEach(cb => { const s = parseFloat(cb.getAttribute('data-score')); max += s; if (cb.checked) earned += s; });
+    }
+    await push(ref(db, 'interview_history'), {
+        time: Date.now(), interviewer: iv.interviewer, candidate: iv.candidate, verdict, earned, max,
+        duration: Math.round((Date.now() - iv.startTime) / 1000)
+    });
+    logAction('interview', iv.candidate, 'Завершено обзвон: ' + (verdict === 'passed' ? 'пройдено' : 'не пройдено'));
+    document.getElementById('test-questions-list-container').innerHTML = '';
+    await remove(ref(db, 'active_interview'));
+    closeResultChoiceModal();
+    alert('Обзвон завершено!');
+};
          // Захист сайту
         document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
         document.addEventListener('keydown', function(e) {
@@ -2085,6 +2363,26 @@ window.openMyRequests = async function() {
             document.getElementById('hierarchyScreen').style.display = 'none';
             document.getElementById('factionListScreen').style.display = 'block';
         }
+        const LOOK = { a:'а', c:'с', e:'е', i:'і', k:'к', m:'м', o:'о', p:'р', t:'т', x:'х', h:'н', b:'в' };
+function normSearch(s) {
+    return String(s).toLowerCase().replace(/[aceikmoptxhb]/g, ch => LOOK[ch]).replace(/\s+/g, ' ').trim();
+}
+function searchRules() {
+    const q = normSearch(document.getElementById('rules-search').value);
+    let any = false;
+    document.querySelectorAll('#rulesModal .rule-category').forEach(cat => {
+        const titleHit = !q || normSearch(cat.querySelector('h3').textContent).includes(q);
+        let vis = 0;
+        cat.querySelectorAll('.rule-item').forEach(it => {
+            const hit = titleHit || normSearch(it.textContent).includes(q);
+            it.style.display = hit ? '' : 'none';
+            if (hit) vis++;
+        });
+        cat.style.display = vis ? '' : 'none';
+        if (vis) any = true;
+    });
+    document.getElementById('rules-empty').style.display = any ? 'none' : 'block';
+}
 
        
     </script>
