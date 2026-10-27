@@ -1299,7 +1299,10 @@ input,textarea{user-select:text}
         import { initializeApp } from "https://www.gstatic.com/firebasejs/13.1.0/firebase-app.js";
         import { getDatabase, ref, get, set, child, onValue, remove, push, onDisconnect } from "https://www.gstatic.com/firebasejs/13.1.0/firebase-database.js";
 
+
+        
         const firebaseConfig = {
+        
             apiKey: "AIzaSyAjpHL-aaOQPZGK1CQHlrKvhEtOrYrsbvI",
             authDomain: "ancets-b3aa7.firebaseapp.com",
             projectId: "ancets-b3aa7",
@@ -2288,16 +2291,42 @@ window.setInterviewVerdict = async function(verdict) {
     closeResultChoiceModal();
     alert('Обзвон завершено!');
 };
-         // Захист сайту
-        document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'F12') { e.preventDefault(); return false; }
-            if (e.ctrlKey) {
-                const key = e.key.toLowerCase();
-                if (['u', 'c', 's', 'a', 'p'].includes(key)) { e.preventDefault(); return false; }
-                if (e.shiftKey && ['i', 'j', 'c'].includes(key)) { e.preventDefault(); return false; }
-            }
-        });
+       document.addEventListener('DOMContentLoaded', () => {
+    // 1. Блокування контекстного меню (права кнопка миші)
+    document.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+    });
+
+    // 2. Блокування гарячих клавіш (F12, Ctrl+U, Ctrl+Shift+I тощо)
+    document.addEventListener('keydown', (e) => {
+        // Заборона клавіші F12
+        if (e.key === 'F12') {
+            e.preventDefault();
+            return false;
+        }
+
+        // Заборона Ctrl + Shift + I (Developer Tools)
+        // Заборона Ctrl + Shift + J (Console)
+        // Заборона Ctrl + Shift + C (Inspect Element)
+        if (e.ctrlKey && e.shiftKey && ['I', 'J', 'C'].includes(e.key.toUpperCase())) {
+            e.preventDefault();
+            return false;
+        }
+
+        // Заборона Ctrl + U (Перегляд джерельного коду сторінки)
+        if (e.ctrlKey && e.key.toUpperCase() === 'U') {
+            e.preventDefault();
+            return false;
+        }
+
+        // Заборона Ctrl + S (Збереження сторінки) - опціонально
+        if (e.ctrlKey && e.key.toUpperCase() === 'S') {
+            e.preventDefault();
+            return false;
+        }
+    });
+});
+        
         document.addEventListener('selectstart', function(e) { e.preventDefault(); });
     </script>
 
