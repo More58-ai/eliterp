@@ -1,0 +1,2238 @@
+<!-- 
+     All materials presented on this website are subject to copyright and are protected in accordance with the law.
+     Copying, distributing, or using the materials of this website in any form without the prior written consent of the copyright holder is prohibited.
+     __
+     Усі матеріали, представлені на цьому сайті, є об'єктами авторського права і охороняються відповідно до законодавства.
+     Копіювання, розподіл або використання матеріалів сайту в будь-якій формі без попередньої письмової згоди власника авторських прав заборонено.
+-->
+
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite RP - Офіційний Портал</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="background-scene"></div>
+    <div class="gradient-mask"></div>
+
+    <!-- ЕКРАН БЛОКУВАННЯ ПІД ЧАС ОБЗВОНУ -->
+    <div id="interview-lock-screen">
+        <div class="lock-icon-box"><i class="fa-solid fa-user-lock"></i></div>
+        <div class="lock-title" id="lock-screen-title">Сайт тимчасово заблоковано</div>
+        <div class="lock-desc" id="lock-screen-desc">Сайт тимчасово заблоковано до завершення обзвону з метою збереження конфіденційності.</div>
+        <button id="btn-dismiss-lock" class="btn-auth-main" style="display: none; max-width: 320px;" onclick="dismissLockScreen()">Закрити та повернутися до сайту</button>
+    </div>
+
+    
+    <!-- ЕКРАН АВТОРИЗАЦІЇ -->
+<div id="auth-screen">
+    <div class="auth-container">
+        <div class="auth-emblem"><i class="fa-solid fa-crown"></i></div>
+        <div class="auth-logo">ELITE RP</div>
+        <div class="auth-sub">Офіційний портал</div>
+
+        <div class="auth-tabs">
+            <button type="button" class="auth-tab active" id="tab-login" onclick="switchAuthMode('login');setAuthTab('login')">Вхід</button>
+            <button type="button" class="auth-tab" id="tab-reg" onclick="switchAuthMode('reg');setAuthTab('reg')">Реєстрація</button>
+        </div>
+
+        <div id="login-form">
+            <div class="auth-input-group">
+                <label>Нікнейм</label>
+                <div class="auth-field"><i class="fa-solid fa-user"></i>
+                    <input type="text" id="login-nick" class="auth-input" placeholder="Введіть нікнейм"></div>
+            </div>
+            <div class="auth-input-group">
+                <label>Пароль</label>
+                <div class="auth-field"><i class="fa-solid fa-lock"></i>
+                    <input type="password" id="login-pass" class="auth-input" placeholder="Введіть пароль"></div>
+            </div>
+            <button class="btn-auth-main" onclick="handleLogin()"><i class="fa-solid fa-right-to-bracket"></i> Увійти</button>
+            <div class="auth-note"><i class="fa-solid fa-shield-halved"></i> Ще немає акаунта? Відкрийте вкладку «Реєстрація».</div>
+        </div>
+
+        <div id="reg-form" style="display: none;">
+            <div class="auth-input-group">
+                <label>Нікнейм</label>
+                <div class="auth-field"><i class="fa-solid fa-user"></i>
+                    <input type="text" id="reg-nick" class="auth-input" placeholder="Придумайте нікнейм"></div>
+            </div>
+            <div class="auth-input-group">
+                <label>Пароль</label>
+                <div class="auth-field"><i class="fa-solid fa-lock"></i>
+                    <input type="password" id="reg-pass1" class="auth-input" placeholder="Пароль"></div>
+            </div>
+            <div class="auth-input-group">
+                <label>Повторіть пароль</label>
+                <div class="auth-field"><i class="fa-solid fa-key"></i>
+                    <input type="password" id="reg-pass2" class="auth-input" placeholder="Повторіть пароль"></div>
+            </div>
+            <div class="auth-input-group">
+                <label>Вік</label>
+                <div class="auth-field"><i class="fa-solid fa-cake-candles"></i>
+                    <input type="number" id="reg-age" class="auth-input" placeholder="Введіть ваш вік"></div>
+            </div>
+            <button class="btn-auth-main" onclick="handleRegister()"><i class="fa-solid fa-user-plus"></i> Зареєструватись</button>
+        </div>
+    </div>
+</div>
+
+    <!-- ХЕДЕР -->
+   <header>
+    <div class="logo-container" onclick="location.reload()">
+        <span class="header-logo-text">ELITE RP</span>
+    </div>
+
+    <div class="top-links">
+        <a onclick="openServerModal()"><i class="fa-solid fa-gamepad"></i> Грати</a>
+        <a onclick="openFactionsModal()"><i class="fa-solid fa-users"></i> Фракції</a>
+        
+       <div class="top-dd">
+    <a tabindex="0">&#9662; Соцмережі</a>
+    <div class="top-dd-content"><div class="top-dd-box">
+        <a href="https://t.me/elite_rp01" target="_blank"><i class="fa-brands fa-telegram" style="color:#2aabee"></i> Telegram</a>
+        <a href="https://discord.gg/AMTbsyE6H" target="_blank"><i class="fa-brands fa-discord" style="color:#5865F2"></i> Discord</a>
+        <a href="https://www.tiktok.com/@elita_rp1?is_from_webapp=1&sender_device=pc" target="_blank"><i class="fa-brands fa-tiktok"></i> TikTok</a>
+    </div></div>
+</div>
+    </div>
+
+
+    <div class="header-right">
+        <div class="fortune-cookie" onclick="openCookie()" title="Піченька з передбаченням">🥠</div>
+        <div class="user-profile-badge" onclick="openAccountModal()" title="Керування акаунтом">
+            <img src="https://i.postimg.cc/hPG3FjBV/50f72c47-ae9d-4cad-a659-19acf923f8d5.png" class="user-avatar-small" id="header-user-ava">
+            <span id="header-username" style="font-size: 12px; font-weight: 700;">Гравець</span>
+            <div id="header-roles-box" style="display: inline-block;"></div>
+        </div>
+    </div>
+</header>
+
+    <!-- MAIN WRAPPER -->
+    <div class="main-wrapper">
+        
+        <div class="content-area">
+            
+            <!-- ГОЛОВНИЙ БАНЕР -->
+             <section class="hero-banner" id="mainHeroBanner">
+            <div class="hero-left">
+   <h1 class="hero-title" id="typed-title" aria-label="Вітаємо в Elite RP!"></h1>
+    <p class="hero-desc">Реалістичне рольове місто: поліція, медики, цивільні та кримінал.<br>
+    Тут на тебе чекає дружня атмосфера, чесні правила та регулярні івенти.<br>
+    Обирай фракцію, дотримуйся правил і стань частиною спільноти вже зараз!</p>
+
+    <div class="hero-buttons">
+       <button class="btn-telegram" onclick="window.open('https://t.me/elite_rp01')"><span class="tg-ico"><i class="fa-solid fa-paper-plane"></i></span> ДОЛУЧИТИСЬ В TELEGRAM</button>
+        <button class="btn-discord" onclick="window.open('https://discord.gg/AMTbsyE6H')"><span class="dc-ico"><i class="fa-brands fa-discord"></i></span> ДОЛУЧИТИСЬ В DISCORD</button>
+       <button class="btn-primary" onclick="openServerModal()">На сервер</button>
+        <button class="btn-secondary" onclick="openFactionsModal()"><i class="fa-solid fa-users-gear"></i> Обрати фракцію</button>
+<button type="button" class="btn-updates"><span class="upd-ico"><i class="fa-solid fa-rocket"></i></span> Оновлення <span class="upd-new">СКОРО</span></button>        <button class="btn-faction-apply" onclick="openApplyFactionsModal()"><i class="fa-solid fa-file-signature"></i> Подати анкету у фракцію</button>
+        <button class="btn-support-tech" onclick="openSupportModal()"><i class="fa-solid fa-heart"></i> Підтримати тех. адміна</button>
+    </div>
+
+    <div class="scroll-down-hint" onclick="document.getElementById('rules-home').scrollIntoView({behavior:'smooth'})">
+        <span>Гортай нижче</span><i class="fa-solid fa-chevron-down"></i>
+    </div>
+</div>
+
+
+                <div class="admin-action-btns-row">
+                    <button class="btn-give-role-panel" id="btn-give-role-main" onclick="openManageRolesModal()">
+                        <i class="fa-solid fa-user-gear"></i> Видача посади
+                    </button>
+                    <button class="btn-tech-support-panel" id="btn-tech-support-main" onclick="openTechSupportRequestsModal()">
+                        <i class="fa-solid fa-headset"></i> Підтримка (<span id="support-requests-count">0</span>)
+                    </button>
+                    <button class="btn-review-panel" id="btn-review-apps" onclick="openReviewModal()"><i class="fa-solid fa-clipboard-check"></i> Перевірка анкет у фракцію</button>
+                    <button class="btn-review-panel btn-journal" id="btn-journal" onclick="openJournal()"><i class="fa-solid fa-book"></i> Журнал дій</button>
+<button class="btn-review-panel btn-ihistory" id="btn-ihistory" onclick="openInterviewHistory()"><i class="fa-solid fa-clock-rotate-left"></i> Історія обзвонів</button>
+                </div>
+
+                <!-- ДИНАМІЧНИЙ БЛОК ОБЗВОНУ -->
+                <div id="interview-control-area" style="display: none; margin-top: 15px;">
+                    <div id="interview-start-btn-box" class="interview-control-box">
+                        <div style="text-align: left;">
+                            <div style="font-size: 14px; font-weight: 800; color: white;">Панель проведення обзвонів</div>
+                            <div style="font-size: 12px; color: #aaa;">Розпочніть обзвон кандидата з автоматичним блокуванням та генератором тестів</div>
+                        </div>
+                        <button class="btn-interview-start" onclick="openSelectCandidateModal()">
+                            <i class="fa-solid fa-headset"></i> Провести обзвон
+                        </button>
+                    </div>
+
+                    <div id="interview-active-box" class="interview-active-screen" style="display: none;">
+                        <div class="interview-top-row">
+                            <div class="interview-candidate-profile">
+                                <img src="https://i.postimg.cc/hPG3FjBV/50f72c47-ae9d-4cad-a659-19acf923f8d5.png" class="interview-cand-ava" id="active-cand-ava">
+                                <div class="interview-cand-details">
+                                    <div style="font-size: 11px; color: #ff7700; font-weight: 800; text-transform: uppercase;">Кандидат на обзвоні</div>
+                                    <div class="interview-cand-nick" id="active-candidate-nick">Кандидат</div>
+                                    <div id="active-cand-roles-box" style="display: flex; gap: 4px;"></div>
+                                </div>
+                            </div>
+                            <div class="interview-timer-box" id="interview-timer">00:00</div>
+                        </div>
+                        <div class="interview-actions-row">
+                            <button class="btn-gen-questions" onclick="openTestGeneratorModal()">
+                                <i class="fa-solid fa-file-lines"></i> Згенерувати питання
+                            </button>
+                            <button class="btn-finish-interview-final" onclick="openResultChoiceModal()">
+                                <i class="fa-solid fa-flag-checkered"></i> Завершити обзвон
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+<section class="rules-glass reveal" id="rules-home">
+    <nav class="nav-links">
+        <a href="#" class="active" onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;">Головна</a>
+        <a href="#" onclick="document.getElementById('rules-home').scrollIntoView({behavior:'smooth'}); return false;">Правила</a>
+        <a href="#" onclick="openFactionsModal(); return false;">Фракції</a>
+        <a href="#" onclick="openHighAdminModal(); return false;">Адміністрація</a>
+    </nav>
+
+    <div class="rules-main">
+        <h1 class="faq-title">ПРАВИЛА</h1>
+        <div class="search-wrap">
+            <input type="search" id="home-rules-search" placeholder="Знайти пункт.." oninput="filterHomeRules()">
+        </div>
+        <div class="menu-container" id="home-rules-grid"></div>
+        <div class="rules-empty" id="home-rules-empty">Нічого не знайдено</div>
+    </div>
+</section>
+           
+<span id="stat-nick" style="display:none"></span>
+            <!-- КАРТКИ ВНИЗУ -->
+            
+
+        </div>
+
+        
+
+    </div>
+
+    <!-- ПЛАВАЮЧА КНОПКА ТЕХПІДТРИМКИ (ЧАТ) -->
+    <div class="floating-chat-btn" onclick="openTechChatModal()" title="Зв'язатися з техпідтримкою">
+        <i class="fa-solid fa-headset"></i>
+    </div>
+
+    <!-- МОДАЛЬНЕ ВІКНО КЕРУВАННЯ АКАУНТОМ -->
+    <div id="accountModal" class="modal-overlay" onclick="closeAccountModalOutside(event)">
+        <div class="modal-box" style="max-width: 460px;">
+            <button class="modal-close" onclick="closeAccountModal()">&times;</button>
+            <div class="modal-icon"><i class="fa-solid fa-user-gear"></i></div>
+            <div class="modal-title">Налаштування акаунта</div>
+            
+            <div class="auth-input-group">
+                <label>Посилання на аватарку (URL)</label>
+                <input type="text" id="acc-avatar-input" class="auth-input" placeholder="https://example.com/avatar.png">
+            </div>
+            <div class="auth-input-group">
+    <label>Або завантажте фото з галереї / файлів</label>
+    <label class="upload-btn"><i class="fa-solid fa-image"></i> Обрати фото
+        <input type="file" id="acc-avatar-file" accept="image/*" hidden onchange="pickAvatar(this)">
+    </label>
+    <img id="acc-avatar-preview" class="avatar-preview" alt="">
+</div>
+
+            <div class="auth-input-group">
+                <label>Колір підсвітки головного банера</label>
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <input type="color" id="acc-glow-color" value="#f3a82e" style="width: 50px; height: 42px; background: none; border: 1px solid var(--border-color); border-radius: 10px; cursor: pointer;">
+                    <span style="font-size: 12px; color: #aaa;">Виберіть колір для неонової підсвітки банера</span>
+                </div>
+            </div>
+
+            <button class="btn-auth-main" onclick="saveAccountChanges()">Зберегти зміни</button>
+            <button class="btn-auth-switch" style="border-color: #e74c3c; color: #ff6b6b; margin-top: 15px;" onclick="logoutUser()">Вийти з акаунта</button>
+        </div>
+    </div>
+
+    <!-- МОДАЛЬНЕ ВІКНО АНКЕТИ ТЕХПІДТРИМКИ -->
+    <div id="techChatModal" class="modal-overlay" onclick="closeTechChatModalOutside(event)">
+        <div class="modal-box" style="max-width: 480px;">
+            <button class="modal-close" onclick="closeTechChatModal()">&times;</button>
+            <div class="modal-icon"><i class="fa-solid fa-headset"></i></div>
+            <div class="modal-title">Технічна підтримка</div>
+            <p class="modal-text" style="text-align: center;">Заповніть анкету, і наша техпідтримка зв'яжеться з вами в Discord:</p>
+            
+            <div class="auth-input-group">
+                <label>Ваш Discord (наприклад: username#0000)</label>
+                <input type="text" id="tech-discord-input" class="auth-input" placeholder="Введіть ваш Discord тег">
+            </div>
+            <div class="auth-input-group">
+                <label>Опишіть вашу проблему</label>
+                <textarea id="tech-problem-input" class="auth-input" rows="4" placeholder="Що трапилося? Детально опишіть проблему..." style="resize: none;"></textarea>
+            </div>
+           <button class="btn-my-requests" onclick="openMyRequests(); markRepliesSeen()"><i class="fa-solid fa-inbox"></i> Мої звернення</button>
+            <button class="btn-auth-main" onclick="submitTechSupportRequest()">Надіслати звернення</button>
+        </div>
+    </div>
+
+    <!-- МОДАЛЬНЕ ВІКНО ПЕРЕГЛЯДУ ЗВЕРНЕНЬ (ДЛЯ ТЕХ. АДМІНІСТРАТОРА) -->
+    <div id="techRequestsModal" class="modal-overlay" onclick="closeTechRequestsModalOutside(event)">
+        <div class="modal-box" style="max-width: 750px;">
+            <button class="modal-close" onclick="closeTechRequestsModal()">&times;</button>
+            <div class="modal-icon"><i class="fa-solid fa-clipboard-list"></i></div>
+            <div class="modal-title">Звернення до техпідтримки</div>
+            <div class="rules-content-box" id="tech-requests-list-container" style="max-height: 400px; text-align: left;"></div>
+        </div>
+    </div>
+
+    <!-- МОДАЛЬНЕ ВІКНО КЕРУВАННЯ РОЛЯМИ (ВИДАЧА ПОСАДИ) -->
+    <div id="manageRolesModal" class="modal-overlay" onclick="closeManageRolesModalOutside(event)">
+        <div class="modal-box" style="max-width: 800px;">
+            <button class="modal-close" onclick="closeManageRolesModal()">&times;</button>
+            <div class="modal-icon"><i class="fa-solid fa-user-shield"></i></div>
+            <div class="modal-title">Панель видачі посад та ролей</div>
+            <p class="modal-text" style="text-align: center;">Обирайте або знімайте ролі для користувачів нижче. Зміни зберігаються миттєво:</p>
+            
+            <div class="rules-content-box" id="manage-users-list-container" style="max-height: 420px; text-align: left;"></div>
+        </div>
+    </div>
+
+    <!-- МОДАЛЬНЕ ВІКНО ГЕНЕРАТОРА ПИТАНЬ -->
+    <div id="testGeneratorModal" class="modal-overlay" onclick="closeTestGeneratorModalOutside(event)">
+        <div class="modal-box" style="max-width: 850px;">
+            <button class="modal-close" onclick="closeTestGeneratorModal()">&times;</button>
+            <div class="modal-icon"><i class="fa-solid fa-list-check"></i></div>
+            <div class="modal-title">Тестування кандидата (20 рандомних правил)</div>
+            <p class="modal-text" style="text-align: center;">Позначте галочками питання, на які кандидат відповів правильно.</p>
+            
+            <div class="rules-content-box" id="test-questions-list-container" style="max-height: 400px; text-align: left;"></div>
+
+            <button class="btn-auth-main" style="margin-top: 15px;" onclick="calculateTestResults()">
+                <i class="fa-solid fa-calculator"></i> Завершити опитування та порахувати бали
+            </button>
+        </div>
+    </div>
+
+    <!-- МОДАЛЬНЕ ВІКНО РЕЗУЛЬТАТУ ТЕСТУВАННЯ -->
+    <div id="testResultModal" class="modal-overlay">
+        <div class="modal-box" style="max-width: 500px;">
+            <div class="modal-icon"><i class="fa-solid fa-award"></i></div>
+            <div class="modal-title">Результати опитування</div>
+            <div id="test-result-stats-text" style="font-size: 16px; font-weight: 800; color: white; margin-bottom: 15px;"></div>
+            <div id="test-result-recommendation" style="font-size: 14px; color: var(--gold-light); line-height: 1.5; margin-bottom: 25px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); padding: 15px; border-radius: 12px;"></div>
+            <button class="btn-auth-main" onclick="closeTestResultModal()">Зрозуміло</button>
+        </div>
+    </div>
+
+    <!-- МОДАЛЬНЕ ВІКНО ВИБОРУ ФІНАЛЬНОГО ВЕРДИКТУ ОБЗВОНУ -->
+    <div id="resultChoiceModal" class="modal-overlay" onclick="closeResultChoiceModalOutside(event)">
+        <div class="modal-box" style="max-width: 500px;">
+            <button class="modal-close" onclick="closeResultChoiceModal()">&times;</button>
+            <div class="modal-icon"><i class="fa-solid fa-id-card"></i></div>
+            <div class="modal-title">Вердикт обзвону</div>
+            <p class="modal-text" style="text-align: center;">Оберіть результат проходження обзвону для кандидата:</p>
+            
+            <div class="interview-result-choice-box">
+                <button class="btn-result-passed" onclick="setInterviewVerdict('passed')">Пройдено</button>
+                <button class="btn-result-failed" onclick="setInterviewVerdict('failed')">Не пройдено</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- МОДАЛЬНЕ ВІКНО АДМІНІСТРАЦІЇ (УПОРЯДКОВАНО ПО ЗРОСТАННЮ) -->
+    <div id="highAdminModal" class="modal-overlay" onclick="closeHighAdminModalOutside(event)">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeHighAdminModal()">&times;</button>
+            <div class="modal-icon"><i class="fa-solid fa-shield-halved"></i></div>
+            <div class="modal-title">Адміністрація</div>
+            <div class="admin-cards-list" id="high-admins-container"></div>
+        </div>
+    </div>
+
+    <!-- МОДАЛЬНЕ ВІКНО ВИБОРУ КАНДИДАТА НА ОБЗВОН -->
+    <div id="selectCandidateModal" class="modal-overlay" onclick="closeSelectCandidateModalOutside(event)">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeSelectCandidateModal()">&times;</button>
+            <div class="modal-icon"><i class="fa-solid fa-user-plus"></i></div>
+            <div class="modal-title">Оберіть кандидата</div>
+            <p class="modal-text" style="text-align: center;">Натисніть на акаунт користувача, якому бажаєте розпочати обзвон:</p>
+            <div class="candidate-select-list" id="candidates-container"></div>
+        </div>
+    </div>
+
+    <!-- МОДАЛЬНЕ ВІКНО ПРАВИЛ -->
+    <div id="rulesModal" class="modal-overlay" onclick="closeRulesModalOutside(event)">
+        <div class="modal-box" style="max-width: 850px;">
+            <button class="modal-close" onclick="closeRulesModal()">&times;</button>
+            <div class="modal-icon"><i class="fa-solid fa-book-open"></i></div>
+            <div class="modal-title">Звід правил проєкту Elite RP</div>
+            <input type="text" id="rules-search" class="auth-input" placeholder="🔍 Пошук по правилах: RDM, КК-201, штраф..." oninput="searchRules()" style="margin-bottom:12px">
+<div id="rules-empty" class="news-empty" style="display:none">Нічого не знайдено</div>
+            <div class="rules-content-box">
+                <div class="rule-category">
+                    <h3>1. Регламент адміністрації</h3>
+                    <div class="rule-item">1.1 Адміністратор є обличчям проєкту і зобов'язаний дотримуватися моральних норм. <span class="punishment">[Покарання: Виговор / Зняття]</span></div>
+                    <div class="rule-item">1.2 Заборонено використовувати адмін-привілеї в особистих цілях та на користь третіх осіб. <span class="punishment">[Покарання: Зняття + ЧС]</span></div>
+                    <div class="rule-item">1.3 Адміністратор зобов'язаний мати відеодокази порушення гравця при видачі покарання та зберігати їх протягом 3 днів. <span class="punishment">[Покарання: Попередження]</span></div>
+                </div>
+                <div class="rule-category">
+                    <h3>2. Базові RolePlay терміни</h3>
+                    <div class="rule-item"><b>NonRP (Non-Roleplay)</b> — нереалістична поведінка, що суперечить логіці реального життя. <span class="punishment">[Покарання: Деморган 30-60 хв]</span></div>
+                    <div class="rule-item"><b>RDM (Random Deathmatch)</b> — вбивство або завдання шкоди гравцю без IC причини. <span class="punishment">[Покарання: Варн / Бан 3 дні]</span></div>
+                    <div class="rule-item"><b>VDM (Vehicle Deathmatch)</b> — навмисне вбивство або завдання шкоди за допомогою транспортного засобу. <span class="punishment">[Покарання: Деморган 60 хв]</span></div>
+                    <div class="rule-item"><b>MG (Metagaming)</b> — використання OOC (реальної) інформації в IC (ігровому) чаті. <span class="punishment">[Покарання: Мут 20 хв]</span></div>
+                    <div class="rule-item"><b>PG (Powergaming)</b> — перебільшення можливостей свого персонажа (наприклад, бій 1 проти 3). <span class="punishment">[Покарання: Деморган 40 хв]</span></div>
+                    <div class="rule-item"><b>FearRP</b> — відсутність страху за своє життя у відповідних ситуаціях (зброя біля голови тощо). <span class="punishment">[Покарання: Деморган 40 хв]</span></div>
+                    <div class="rule-item"><b>NLR (New Life Rule)</b> — правило нового життя після смерті (заборонено повертатися на місце смерті 15 хв). <span class="punishment">[Покарання: Деморган 30 хв]</span></div>
+                    <div class="rule-item"><b>TWD (Talking While Dead)</b> — розмова або передача інформації у тяжкопораненому стані. <span class="punishment">[Покарання: Мут 30 хв]</span></div>
+                    <div class="rule-item"><b>Cuff Rush</b> — надягання кайданкок без попередньої відігровки або у бігу. <span class="punishment">[Покарання: Деморган 40 хв]</span></div>
+                </div>
+                <div class="rule-category">
+                    <h3>3. Статут Національної поліції</h3>
+                    <div class="rule-item">3.1 Співробітник поліції зобов'язаний бути ввічливим до громадян незалежно від їхнього статусу.</div>
+                    <div class="rule-item">3.2 Заборонено відкривати вогонь без попереджувального пострілу (окрім загрози життю). <span class="punishment">[Покарання: Звільнення + Деморган]</span></div>
+                    <div class="rule-item">3.3 Заборонено брати хабарі та перевищувати службові повноваження (NonRP Cop). <span class="punishment">[Покарання: Варн / Бан]</span></div>
+                </div>
+                <div class="rule-category">
+                    <h3>4. Правила дорожнього руху (ПДР)</h3>
+                    <div class="rule-item">4.1 Рух транспортних засобів здійснюється виключно по правій стороні дороги. <span class="punishment">[Штраф: 500 ₴]</span></div>
+                    <div class="rule-item">4.2 Заборонено проїжджати на червоний сигнал світлофора. <span class="punishment">[Штраф: 800 ₴]</span></div>
+                    <div class="rule-item">4.3 Паркування у недозволених місцях (на проїжджій частині, тротуарах). <span class="punishment">[Штраф: 1000 ₴ + евакуація]</span></div>
+                    <div class="rule-item">4.4 Їзда у нетверезому стані або керування авто з критичними пошкодженнями. <span class="punishment">[Штраф: 1500 ₴ + вилучення прав]</span></div>
+                </div>
+                <div class="rule-category">
+                    <h3>5. Кримінальний кодекс (КК)</h3>
+                    <div class="rule-item">5.1 <b>КК-101:</b> Напад на мирного громадянина з використанням зброї. <span class="punishment">[Термін: 3 роки тюрми]</span></div>
+                    <div class="rule-item">5.2 <b>КК-201:</b> Відкрите носіння або зберігання зброї у громадських місцях без ліцензії. <span class="punishment">[Штраф 2000 ₴ + конфіскація]</span></div>
+                    <div class="rule-item">5.3 <b>КК-305:</b> Посягання на життя працівника державних органів / держслужбовця. <span class="punishment">[Термін: 5 років тюрми]</span></div>
+                </div>
+                <div class="rule-category">
+                    <h3>6. Адміністративний кодекс (АК)</h3>
+                    <div class="rule-item">6.1 <b>АК-101:</b> Дрібне хуліганство, нецензурна лайка в громадських місцях. <span class="punishment">[Штраф: 300 ₴]</span></div>
+                    <div class="rule-item">6.2 <b>АК-201:</b> Непокора законним вимогам представника влади. <span class="punishment">[Штраф: 1000 ₴ або арешт]</span></div>
+                    <div class="rule-item">6.3 <b>АК-302:</b> Хибний виклик екстрених служб (Поліція, ДСНС, МОЗ). <span class="punishment">[Штраф: 1200 ₴]</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- МОДАЛЬНЕ ВІКНО ФРАКЦІЙ -->
+    <div id="factionsModal" class="modal-overlay" onclick="closeFactionsModalOutside(event)">
+        <div class="modal-box" style="max-width: 650px;">
+            <button class="modal-close" onclick="closeFactionsModal()">&times;</button>
+            
+            <div id="factionListScreen">
+                <div class="modal-icon"><i class="fa-solid fa-users-rectangle"></i></div>
+                <div class="modal-title">Державні та силові структури</div>
+                <p class="modal-text" style="text-align: center;">Оберіть фракцію, щоб переглянути інформацію про керівництво та діяльність:</p>
+                
+                <button class="btn-hierarchy" onclick="showHierarchyScreen()"><i class="fa-solid fa-sitemap"></i> Переглянути ієрархію державних органів</button>
+
+                <div class="factions-scroll-list">
+                    <div class="faction-card-item" onclick="showLeaderInfo('Служба Безпеки України (СБУ)', 'cnfcsr35', 'hokahoka200_14973')">
+                        <div class="faction-card-title"><i class="fa-solid fa-shield-halved" style="color:var(--gold);"></i> Служба Безпеки України</div>
+                        <div class="faction-card-desc">Контррозвідка, боротьба з тероризмом та захист державної безпеки.</div>
+                    </div>
+                    <div class="faction-card-item" onclick="showLeaderInfo('Судова Влада', 'domytik', 'zeleboba3._80058')">
+                        <div class="faction-card-title"><i class="fa-solid fa-scale-balanced" style="color:var(--gold);"></i> Судова Влада</div>
+                        <div class="faction-card-desc">Розгляд кримінальних та цивільних справ, контроль законності.</div>
+                    </div>
+                    <div class="faction-card-item" onclick="showLeaderInfo('Державне Бюро Розслідувань (ДБР)', null, null)">
+                        <div class="faction-card-title"><i class="fa-solid fa-building-shield" style="color:var(--gold);"></i> Державне Бюро Розслідувань</div>
+                        <div class="faction-card-desc">Розслідування злочинів, скоєних вищими службовими особами.</div>
+                    </div>
+                    <div class="faction-card-item" onclick="showLeaderInfo('Збройні Сили України (ЗСУ)', 'domytik', 'zeleboba3._80058')">
+                        <div class="faction-card-title"><i class="fa-solid fa-jet-fighter" style="color:var(--gold);"></i> Збройні Сили України</div>
+                        <div class="faction-card-desc">Оборона країни, стратегічні об'єкти та забезпечення військової безпеки.</div>
+                    </div>
+                    <div class="faction-card-item" onclick="showLeaderInfo('Національна Поліція України (НПУ)', 'domytik', 'zeleboba3._80058')">
+                        <div class="faction-card-title"><i class="fa-solid fa-car-burst" style="color:var(--gold);"></i> Національна Поліція України</div>
+                        <div class="faction-card-desc">Захист прав громадян, патрулювання міста та боротьба зі злочинністю.</div>
+                    </div>
+                    <div class="faction-card-item" onclick="showLeaderInfo('Спецпідрозділ КОРД', 'gorodok2001', 'gorodok2002')">
+                        <div class="faction-card-title"><i class="fa-solid fa-user-ninja" style="color:var(--gold);"></i> Спецпідрозділ КОРД</div>
+                        <div class="faction-card-desc">Силові затримання, штурми та звільнення заручників.</div>
+                    </div>
+                    <div class="faction-card-item" onclick="showLeaderInfo('Державна Служба Надзвичайних Ситуацій (ДСНС)', null, null)">
+                        <div class="faction-card-title"><i class="fa-solid fa-fire-extinguisher" style="color:var(--gold);"></i> ДСНС</div>
+                        <div class="faction-card-desc">Порятунок людей, гасіння пожеж та ліквідація наслідків ДТП.</div>
+                    </div>
+                    <div class="faction-card-item" onclick="showLeaderInfo('Міністерство Охорони Здоров\'я (МОЗ)', null, null)">
+                        <div class="faction-card-title"><i class="fa-solid fa-hospital" style="color:var(--gold);"></i> Міністерство Охорони Здоров'я</div>
+                        <div class="faction-card-desc">Надання медичної допомоги, лікування та реанімація громадян.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ЕКРАН ІНФОРМАЦІЇ ПРО ЛІДЕРА -->
+            <div id="factionLeaderScreen" style="display: none;">
+                <div class="modal-title" id="displayFactionName" style="margin-bottom: 20px;">Фракція</div>
+                <div class="leader-card-box" id="leaderDetailBox"></div>
+                <button class="btn-back-factions" onclick="backToFactionsList()"><i class="fa-solid fa-arrow-left"></i> Назад до списку</button>
+            </div>
+
+            <!-- ЕКРАН ІЄРАРХІЇ -->
+            <div id="hierarchyScreen" style="display: none;">
+                <div class="modal-title" style="margin-bottom: 20px;">Ієрархія державних органів</div>
+                <div class="hierarchy-list">
+                    <div class="hierarchy-item">
+                        <div class="hierarchy-rank">Судова Влада</div>
+                        <div class="hierarchy-name">Голова Суду ➔ Суддя ➔ Секретар суду</div>
+                    </div>
+                    <div class="hierarchy-item">
+                        <div class="hierarchy-rank">Служба Безпеки України (СБУ)</div>
+                        <div class="hierarchy-name">Голова СБУ ➔ Заступник ➔ Слідчий ➔ Оперативник ➔ Стажер</div>
+                    </div>
+                    <div class="hierarchy-item">
+                        <div class="hierarchy-rank">Державне Бюро Розслідувань (ДБР)</div>
+                        <div class="hierarchy-name">Директор ➔ Заступник ➔ Старший слідчий ➔ Детектив</div>
+                    </div>
+                    <div class="hierarchy-item">
+                        <div class="hierarchy-rank">Збройні Сили України (ЗСУ)</div>
+                        <div class="hierarchy-name">Генерал ➔ Полковник ➔ Підполковник ➔ Майор ➔ Капітан ➔ Рядовий</div>
+                    </div>
+                    <div class="hierarchy-item">
+                        <div class="hierarchy-rank">Національна Поліція України (НПУ)</div>
+                        <div class="hierarchy-name">Генерал ➔ Полковник ➔ Майор ➔ Капітан ➔ Лейтенант ➔ Сержант ➔ Кадет</div>
+                    </div>
+                    <div class="hierarchy-item">
+                        <div class="hierarchy-rank">Спецпідрозділ КОРД</div>
+                        <div class="hierarchy-name">Командир ➔ Заступник ➔ Інструктор ➔ Бєєць КОРД ➔ Стажер</div>
+                    </div>
+                    <div class="hierarchy-item">
+                        <div class="hierarchy-rank">ДСНС та МОЗ</div>
+                        <div class="hierarchy-name">Начальник ➔ Заступник ➔ Головний лікар / Старший черговий ➔ Спеціаліст ➔ Інтерн</div>
+                    </div>
+                </div>
+                <button class="btn-back-factions" onclick="backToFactionsList()"><i class="fa-solid fa-arrow-left"></i> Назад до списку</button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- МОДАЛЬНЕ ВІКНО ІНФО ПРО СЕРВЕР -->
+    <div id="serverModal" class="modal-overlay" onclick="closeServerModalOutside(event)">
+        <div class="modal-box" style="max-width: 500px;">
+            <button class="modal-close" onclick="closeServerModal()">&times;</button>
+            <div class="modal-icon"><i class="fa-solid fa-server"></i></div>
+            <div class="modal-title">Як зайти на сервер</div>
+            <div class="instruction-box">
+                <b>1.</b> Відкрийте Roblox та знайдіть гру <b>Emergency Hamburg</b>.<br>
+                <b>2.</b> Зайдіть у меню телефону всередині гри.<br>
+                <b>3.</b> Перейдіть у розділ приватних серверів.<br>
+                <b>4.</b> Введіть унікальний код підключення:
+            </div>
+            <div class="requisites-box" style="margin-bottom: 15px;">
+                <div class="requisites-label">Код сервера</div>
+                <div class="requisites-number" id="serverCodeText" style="color: var(--gold-light);">pv6ccs55</div>
+            </div>
+            <button class="btn-copy" onclick="copyServerCode()" style="margin-bottom: 15px;"><i class="fa-solid fa-copy"></i> Скопіювати код сервера</button>
+            <a href="https://www.roblox.com/games/7361824707/Emergency-Hamburg" target="_blank" class="server-link-btn"><i class="fa-solid fa-gamepad"></i> Відкрити Roblox</a>
+        </div>
+    </div>
+
+    <!-- МОДАЛЬНЕ ВІКНО ДОНАТУ ТЕХ. АДМІНІСТРАТОРУ -->
+    <div id="supportModal" class="modal-overlay" onclick="closeSupportModalOutside(event)">
+        <div class="modal-box" style="max-width: 450px;">
+            <button class="modal-close" onclick="closeSupportModal()">&times;</button>
+            <div class="modal-icon"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+            <div class="modal-title">Підтримка тех. адміністратора</div>
+            <p class="modal-text" style="text-align: center;">Ви можете підтримати розробку та утримання нашого порталу донатом на рахунок Monobank:</p>
+            <div class="requisites-box">
+                <div class="requisites-label">Картка Monobank</div>
+                <div class="requisites-number">4874 0700 2007 2490</div>
+            </div>
+            <button class="btn-copy" onclick="copyCardNumber()"><i class="fa-solid fa-copy"></i> Скопіювати реквізити</button>
+        </div>
+    </div>
+    <div id="applyFactionsModal" class="modal-overlay" onclick="if(event.target===this)closeM('applyFactionsModal')">
+ <div class="modal-box" style="max-width:600px"><button class="modal-close" onclick="closeM('applyFactionsModal')">&times;</button>
+  <div class="modal-icon"><i class="fa-solid fa-file-signature"></i></div><div class="modal-title">Анкета у фракцію</div>
+  <p class="modal-text" style="text-align:center">Доступні фракції, у яких є лідер:</p>
+  <div class="factions-scroll-list" id="apply-factions-list"></div></div></div>
+
+<div id="applyFormModal" class="modal-overlay" onclick="if(event.target===this)closeM('applyFormModal')">
+ <div class="modal-box" style="max-width:720px"><button class="modal-close" onclick="closeM('applyFormModal')">&times;</button>
+  <div class="app-head"><i id="app-sticker-l" class="app-sticker fa-solid fa-shield-halved"></i>
+   <div style="text-align:center"><div class="app-head-sub">Офіційний бланк • Elite RP</div><div class="app-head-title">Анкета на вступ до<br><span id="app-faction-title" style="color:var(--gold-light)"></span></div></div>
+   <i id="app-sticker-r" class="app-sticker fa-solid fa-shield-halved"></i></div>
+  <div class="rules-content-box" id="app-form-fields" style="max-height:420px;gap:0"></div>
+  <button class="btn-auth-main" onclick="submitApplication()"><i class="fa-solid fa-paper-plane"></i> Надіслати анкету</button></div></div>
+
+<div id="reviewModal" class="modal-overlay" onclick="if(event.target===this)closeM('reviewModal')">
+ <div class="modal-box" style="max-width:820px"><button class="modal-close" onclick="closeM('reviewModal')">&times;</button>
+  <div id="reviewScreenList"><div class="modal-icon" style="color:#13a8b3"><i class="fa-solid fa-clipboard-check"></i></div><div class="modal-title">Перевірка анкет</div>
+   <p class="modal-text" style="text-align:center">Оберіть фракцію:</p><div class="factions-scroll-list" id="review-factions-list"></div></div>
+  <div id="reviewScreenDetail" style="display:none"><div class="modal-title" id="review-faction-title" style="margin-bottom:5px"></div>
+   <div class="rv-tabs"><button class="rv-tab pending" data-t="pending" onclick="setRevTab('pending')">Очікування</button><button class="rv-tab rejected" data-t="rejected" onclick="setRevTab('rejected')">Відхилені</button><button class="rv-tab approved" data-t="approved" onclick="setRevTab('approved')">Схвалені</button></div>
+   <div class="rules-content-box" id="review-apps-list" style="max-height:400px"></div>
+   <button class="btn-back-factions" style="margin-top:15px" onclick="openReviewModal()"><i class="fa-solid fa-arrow-left"></i> До фракцій</button></div></div></div>
+
+<div id="myRequestsModal" class="modal-overlay" onclick="if(event.target===this)closeM('myRequestsModal')">
+ <div class="modal-box" style="max-width:640px"><button class="modal-close" onclick="closeM('myRequestsModal')">&times;</button>
+  <div class="modal-icon"><i class="fa-solid fa-inbox"></i></div><div class="modal-title">Мої звернення</div>
+  <div class="rules-content-box" id="my-requests-list" style="max-height:430px"></div></div></div>
+
+<div id="accountViewModal" class="modal-overlay" onclick="if(event.target===this)closeM('accountViewModal')">
+ <div class="modal-box" style="max-width:420px"><button class="modal-close" onclick="closeM('accountViewModal')">&times;</button>
+  <div class="modal-title">Акаунт гравця</div><div class="leader-card-box" id="account-view-box"></div></div></div>
+
+<div id="textPromptModal" class="modal-overlay" style="z-index:6000" onclick="if(event.target===this)closeM('textPromptModal')">
+ <div class="modal-box" style="max-width:480px"><button class="modal-close" onclick="closeM('textPromptModal')">&times;</button>
+  <div class="modal-title" id="tp-title" style="font-size:18px"></div>
+  <textarea id="tp-text" class="auth-input" rows="4" style="resize:none;margin-bottom:12px"></textarea>
+  <button class="btn-auth-main" id="tp-ok">Підтвердити</button></div></div>
+
+<div id="decisionModal" class="modal-overlay" style="z-index:99990;background:rgba(0,0,0,.92)">
+ <div class="modal-box" style="max-width:560px"><button class="modal-close" onclick="closeDecision()">&times;</button>
+  <div class="modal-icon" id="dec-icon" style="font-size:64px"></div><div class="modal-title" id="dec-title"></div>
+  <div class="modal-text" id="dec-text" style="text-align:center;font-size:15px"></div><div id="dec-reason"></div>
+  <button class="btn-auth-main" onclick="closeDecision()">Зрозуміло</button></div></div>
+  <div id="journalModal" class="modal-overlay" onclick="if(event.target===this)closeM('journalModal')">
+ <div class="modal-box" style="max-width:760px"><button class="modal-close" onclick="closeM('journalModal')">&times;</button>
+  <div class="modal-icon"><i class="fa-solid fa-book"></i></div><div class="modal-title">Журнал дій</div>
+  <div class="rv-tabs">
+   <button class="jf-tab active" data-f="all" onclick="setJournalFilter('all')">Усі</button>
+   <button class="jf-tab" data-f="role" onclick="setJournalFilter('role')">Ролі</button>
+   <button class="jf-tab" data-f="interview" onclick="setJournalFilter('interview')">Обзвони</button>
+   <button class="jf-tab" data-f="application" onclick="setJournalFilter('application')">Анкети</button>
+  </div>
+  <div class="rules-content-box" id="journal-list" style="max-height:400px;gap:0"></div></div></div>
+
+<div id="historyModal" class="modal-overlay" onclick="if(event.target===this)closeM('historyModal')">
+ <div class="modal-box" style="max-width:760px"><button class="modal-close" onclick="closeM('historyModal')">&times;</button>
+  <div class="modal-icon"><i class="fa-solid fa-clock-rotate-left"></i></div><div class="modal-title">Історія обзвонів</div>
+  <div class="rules-content-box" id="history-list" style="max-height:430px;gap:0"></div></div></div>
+
+
+<!-- МОДАЛКА ОНОВЛЕНЬ -->
+<div id="updatesModal" class="modal-overlay" onclick="if(event.target===this)closeUpdatesModal()">
+    <div class="modal-box">
+        <button class="modal-close" onclick="closeUpdatesModal()">&times;</button>
+
+        <div id="updListScreen" class="upd-screen">
+            <div class="upd-top">
+                <div class="modal-icon"><i class="fa-solid fa-rocket"></i></div>
+                <div class="upd-kicker">Elite RP • Новини проєкту</div>
+                <div class="upd-h">Оновлення</div>
+            </div>
+            <div class="upd-timeline" id="upd-list"></div>
+        </div>
+
+        <div id="updDetailScreen" class="upd-screen" style="display:none">
+            <div id="upd-detail"></div>
+            <div class="upd-back">
+                <button class="btn-back-factions" onclick="backToUpdatesList()"><i class="fa-solid fa-arrow-left"></i> До списку оновлень</button>
+            </div>
+        </div>
+    </div>
+</div>
+  <!-- ПІЧЕНЬКА -->
+<div class="fortune-backdrop" id="fortuneBackdrop" onclick="closeCookie()">
+    <div class="fortune-box">
+        <div class="fortune-big">🥠</div>
+        <div class="fortune-paper">
+            <small>Elite RP • Привітання</small>
+            <p id="fortuneText"></p>
+        </div>
+        <div class="fortune-hint">Натисніть будь-де, щоб закрити</div>
+    </div>
+</div>
+
+<!-- МОДАЛКА ПРАВИЛА -->
+<div id="ruleModal" onclick="if(event.target===this)closeRuleModal()">
+    <div class="rule-box">
+        <span class="close" onclick="closeRuleModal()">&times;</span>
+        <div id="ruleModalBody"></div>
+    </div>
+</div>
+    <!-- SCRIPTS -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/13.1.0/firebase-app.js";
+        import { getDatabase, ref, get, set, child, onValue, remove, push, onDisconnect } from "https://www.gstatic.com/firebasejs/13.1.0/firebase-database.js";
+
+
+        
+        const firebaseConfig = {
+        
+            apiKey: "AIzaSyAjpHL-aaOQPZGK1CQHlrKvhEtOrYrsbvI",
+            authDomain: "ancets-b3aa7.firebaseapp.com",
+            projectId: "ancets-b3aa7",
+            storageBucket: "ancets-b3aa7.firebasestorage.app",
+            messagingSenderId: "450945374380",
+            appId: "1:450945374380:web:12cf39687a02eb0e24e709",
+            databaseURL: "https://ancets-b3aa7-default-rtdb.firebaseio.com/"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        const DEFAULT_AVATAR = "https://i.postimg.cc/hPG3FjBV/50f72c47-ae9d-4cad-a659-19acf923f8d5.png";
+
+        const ROLE_MAP = {
+            player: { l: "Player", c: "role-player", icon: "🎮", rank: 1 },
+            factionleader: { l: "Лідер Фракції", c: "role-factionleader", icon: "🎖️", rank: 1.5 },
+            trainee: { l: "Trainee", c: "role-trainee", icon: "🌱", rank: 2 },
+            junioradmin: { l: "Junior Admin", c: "role-junioradmin", icon: "⭐", rank: 3 },
+            admin: { l: "Admin", c: "role-admin", icon: "🛡️", rank: 4 },
+            senioradmin: { l: "Senior Admin", c: "role-senioradmin", icon: "💫", rank: 5 },
+            headadmin: { l: "Head Admin", c: "role-headadmin", icon: "👑", rank: 6 },
+            deputyheadadmin: { l: "Deputy Head Admin", c: "role-deputyheadadmin", icon: "⚡", rank: 7 },
+            deputyowner: { l: "Deputy Owner", c: "role-deputyowner", icon: "💎", rank: 8 },
+            techadmin: { l: "Tech Admin", c: "role-techadmin", icon: "🔧", rank: 9 },
+            owner: { l: "Owner", c: "role-owner", icon: "🌟", rank: 10 }
+        };
+
+        const ALL_POSSIBLE_QUESTIONS = [
+            { text: "Що таке NonRP (Non-Roleplay)?", score: 0.5 },
+            { text: "Яке покарання за RDM (Random Deathmatch)?", score: 1.0 },
+            { text: "Що означає абревіатура MG (Metagaming)?", score: 0.5 },
+            { text: "Які правила діють при втечі від поліції на скутері?", score: 1.0 },
+            { text: "Що таке FearRP та який обов'язок він накладає?", score: 1.5 },
+            { text: "Назвіть покарання за навмисний вихід із гри під час RP", score: 2.0 },
+            { text: "Що таке правило NLR (Правило нового життя)?", score: 1.5 },
+            { text: "Чи дозволено розмовляти у тяжкопораненому стані (TWD)?", score: 0.5 },
+            { text: "Які особливості та регламент режиму адміністратора?", score: 2.0 },
+            { text: "Що заборонено адміністратору в ігровому режимі?", score: 1.5 },
+            { text: "Який штраф за проїзд на червоне світло згідно з ПДР?", score: 0.5 },
+            { text: "Який штраф за створення ДТП?", score: 1.0 },
+            { text: "Що загрожує за носіння відкритої зброї в місті (КК-201)?", score: 1.5 },
+            { text: "Який штраф за ігнорування вимоги поліції зупинитися?", score: 1.0 },
+            { text: "Які санкції за непокору поліції (АК-201)?", score: 1.0 },
+            { text: "Що таке Cuff Rush та яке покарання за нього?", score: 1.5 },
+            { text: "Яка валюта прирівнюється у RP до гривень (₴)?", score: 0.5 },
+            { text: "Що заборонено поліції згідно зі статутом (ПОЛ-203)?", score: 1.5 },
+            { text: "Які санкції за неправильне паркування?", score: 0.5 },
+            { text: "Яке покарання за VDM?", score: 1.0 }
+        ];
+        // ================= ОСТАННІ НОВИНИ =================
+let newsUsers = {}, newsApps = {}, newsActivity = null;
+
+const fmtDate = t => new Date(t).toLocaleString('uk-UA', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+function fmtDuration(sec) {
+    sec = Math.floor(sec || 0);
+    const d = Math.floor(sec / 86400), h = Math.floor(sec % 86400 / 3600), m = Math.floor(sec % 3600 / 60);
+    return (d ? d + ' д ' : '') + h + ' год ' + m + ' хв';
+}
+function fmtAgo(t) {
+    const s = Math.floor((Date.now() - t) / 1000);
+    if (s < 90) return 'щойно';
+    if (s < 3600) return Math.floor(s / 60) + ' хв тому';
+    if (s < 86400) return Math.floor(s / 3600) + ' год тому';
+    return fmtDate(t);
+}
+function accountMini(nick) {
+    const u = newsUsers[nick];
+    return `<img src="${esc((u && u.avatar) || DEFAULT_AVATAR)}" class="online-avatar">
+        <div class="online-info"><div class="online-nick">${esc(nick)}</div><div>${u ? rolesHtmlOf(u.roles) : ''}</div></div>`;
+}
+
+function renderNews() {
+    const appsBox = document.getElementById('news-apps'), usersBox = document.getElementById('news-users');
+    if (!appsBox || !usersBox) return;
+
+    // 1) останні анкети (з усіх фракцій)
+    const list = [];
+    Object.keys(newsApps).forEach(fk => Object.keys(newsApps[fk] || {}).forEach(id => list.push(newsApps[fk][id])));
+    list.sort((a, b) => b.time - a.time);
+    appsBox.innerHTML = list.slice(0, 5).map(a => {
+        const st = a.status || 'pending';
+        const by = (st === 'approved' || st === 'rejected')
+            ? `<div class="news-by">${st === 'approved' ? 'Схвалив' : 'Відхилив'}: ${a.decidedBy ? `<div class="news-mini">${accountMini(a.decidedBy)}</div>` : '<b>—</b>'}</div>` : '';
+        return `<div class="news-row">
+            <div class="news-mini">${accountMini(a.applicant)}</div>
+            <div class="news-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+            <div class="news-faction">${esc(a.factionName)}</div>
+            ${stBadge(st)}${by}</div>`;
+    }).join('') || '<div class="news-empty">Анкет ще не було</div>';
+
+    // 2) п'ять останніх зареєстрованих
+    const recent = Object.keys(newsUsers).map(k => ({ k, u: newsUsers[k] }))
+        .filter(x => x.u.createdAt).sort((a, b) => b.u.createdAt - a.u.createdAt).slice(0, 5);
+    usersBox.innerHTML = recent.map(x => `<div class="news-row">
+        <div class="news-mini">${accountMini(x.k)}</div>
+        <div class="news-by" style="margin-left:auto">${fmtDate(x.u.createdAt)}</div></div>`).join('')
+        || '<div class="news-empty">Поки немає даних</div>';
+}
+
+function renderActivity() {
+    const box = document.getElementById('news-activity');
+    if (!box) return;
+    const a = newsActivity || {};
+    box.innerHTML = `<div class="act-label">Загалом на сайті</div><div class="act-big">${fmtDuration(a.totalSeconds)}</div>
+        <div class="act-label" style="margin-top:14px">Остання активність</div><div class="act-mid">${a.lastActive ? fmtAgo(a.lastActive) : '—'}</div>`;
+}
+
+function initNews(nick) {
+    onValue(ref(db, 'users'), s => { newsUsers = s.val() || {}; renderNews(); });
+    onValue(ref(db, 'faction_applications'), s => { newsApps = s.val() || {}; renderNews(); });
+    onValue(ref(db, `activity/${nick}`), s => { newsActivity = s.val(); renderActivity(); });
+}
+
+// Облік часу: рахується лише коли вкладка відкрита й на екрані
+function startActivityTracking(nick) {
+    const aRef = ref(db, `activity/${nick}`);
+    let base = 0, ready = false, visibleSince = document.hidden ? null : Date.now();
+
+    get(aRef).then(s => { base = s.exists() ? Number(s.val().totalSeconds) || 0 : 0; ready = true; });
+
+    const flush = () => {
+        if (!ready || visibleSince === null) return;
+        const now = Date.now();
+        base += Math.min(now - visibleSince, 120000) / 1000;   // захист від "сну" комп'ютера
+        visibleSince = now;
+        set(aRef, { totalSeconds: Math.round(base), lastActive: now });
+    };
+
+    setInterval(flush, 30000);
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) { flush(); visibleSince = null; }
+        else visibleSince = Date.now();
+    });
+    window.addEventListener('pagehide', flush);
+}
+
+
+        let currentUserNick = localStorage.getItem('elite_rp_user');
+        let interviewTimerInterval = null;
+        let interviewStartTime = 0;
+
+        if (currentUserNick) {
+            initSession(currentUserNick);
+        }
+
+        window.switchAuthMode = function(mode) {
+            document.getElementById('login-form').style.display = (mode === 'reg') ? 'none' : 'block';
+            document.getElementById('reg-form').style.display = (mode === 'reg') ? 'block' : 'none';
+        }
+
+        window.handleLogin = async function() {
+            const nick = document.getElementById('login-nick').value.trim();
+            const pass = document.getElementById('login-pass').value.trim();
+            if (!nick || !pass) return alert("Заповніть всі поля!");
+
+            try {
+                const snapshot = await get(child(ref(db), `users/${nick}`));
+                if (snapshot.exists()) {
+                    const userData = snapshot.val();
+                    if (userData.password === pass) {
+                        localStorage.setItem('elite_rp_user', nick);
+                        currentUserNick = nick;
+                        initSession(nick);
+                    } else {
+                        alert("Невірний пароль!");
+                    }
+                } else {
+                    alert("Акаунт не знайдено!");
+                }
+            } catch (e) { console.error(e); }
+        }
+
+        window.handleRegister = async function() {
+            const nick = document.getElementById('reg-nick').value.trim();
+            const pass1 = document.getElementById('reg-pass1').value.trim();
+            const pass2 = document.getElementById('reg-pass2').value.trim();
+            const age = document.getElementById('reg-age').value.trim();
+
+            if (!nick || !pass1 || !pass2 || !age) return alert("Заповніть анкету!");
+            if (pass1 !== pass2) return alert("Паролі не співпадають!");
+
+            try {
+                const snapshot = await get(child(ref(db), `users/${nick}`));
+                if (snapshot.exists()) return alert("Нікнейм вже зайнятий!");
+
+                await set(ref(db, `users/${nick}`), {
+                    nickname: nick,
+                    password: pass1,
+                    age: age,
+                    createdAt: Date.now(),
+                    roles: ['player'],
+                    interview_status: 'none',
+                    avatar: DEFAULT_AVATAR,
+                    glowColor: '#f3a82e'
+                });
+
+                alert("Реєстрація успішна!");
+switchAuthMode('login'); if (window.setAuthTab) setAuthTab('login');
+            } catch (e) { console.error(e); }
+        }
+        
+
+        function initSession(nick) {
+            document.getElementById('auth-screen').style.display = 'none';
+            set(ref(db, `online/${nick}`), { nickname: nick, time: Date.now() });
+            initFactionFeatures(nick);
+           
+startActivityTracking(nick);
+initExtras(nick);
+
+           
+
+            // ДАНІ ПОТОЧНОГО ЮЗЕРА
+            onValue(ref(db, `users/${nick}`), (snapshot) => {
+                if (snapshot.exists()) {
+                    const u = snapshot.val();
+                    document.getElementById('header-username').innerText = u.nickname;
+                    document.getElementById('stat-nick').innerText = u.nickname;
+                    
+                    const userAvatar = u.avatar || DEFAULT_AVATAR;
+                    document.getElementById('header-user-ava').src = userAvatar;
+                    document.getElementById('acc-avatar-input').value = (u.avatar && !u.avatar.startsWith('data:')) ? u.avatar : '';
+
+                    const userGlow = u.glowColor || '#f3a82e';
+                    document.getElementById('acc-glow-color').value = userGlow;
+                    document.documentElement.style.setProperty('--banner-glow', hexToRgba(userGlow, 0.45));
+
+                    const roles = Array.isArray(u.roles) ? u.roles : ['player'];
+                    let rolesHtml = '';
+                    let isTechAdmin = false;
+                    let isHighAdmin = false;
+
+                    roles.forEach(r => {
+                        const rKey = r.toLowerCase().trim();
+                        const rm = ROLE_MAP[rKey] || ROLE_MAP['player'];
+                        rolesHtml += `<span class="role-badge ${rm.c}">${rm.icon} ${rm.l}</span>`;
+                        if (rKey === 'techadmin') isTechAdmin = true;
+                        if (['headadmin', 'deputyheadadmin', 'senioradmin', 'admin', 'junioradmin', 'trainee', 'deputyowner', 'techadmin', 'owner'].includes(rKey)) isHighAdmin = true;
+                    });
+
+                    document.getElementById('header-roles-box').innerHTML = rolesHtml;
+                    document.getElementById('btn-give-role-main').style.display = isTechAdmin ? 'inline-flex' : 'none';
+                    document.getElementById('btn-tech-support-main').style.display = isTechAdmin ? 'inline-flex' : 'none';
+                    document.getElementById('interview-control-area').style.display = isHighAdmin ? 'block' : 'none';
+                }
+            });
+
+            // КІЛЬКІСТЬ ЗВЕРНЕНЬ ТЕХПІДТРИМКИ ДЛЯ ТЕХ. АДМІНІСТРАТОРА
+            onValue(ref(db, 'tech_support'), (snapshot) => {
+                const count = snapshot.exists() ? Object.keys(snapshot.val()).length : 0;
+                document.getElementById('support-requests-count').innerText = count;
+            });
+
+            // БЛОКУВАННЯ САЙТУ ПІД ЧАС ОБЗВОНУ
+            onValue(ref(db, 'active_interview'), async (snapshot) => {
+                const uSnap = await get(child(ref(db), `users/${nick}`));
+                if (!uSnap.exists()) return;
+                const uData = uSnap.val();
+                const roles = Array.isArray(uData.roles) ? uData.roles : ['player'];
+                const isPlayerOnly = roles.every(r => ['player','factionleader'].includes(r));
+
+                const lockScreen = document.getElementById('interview-lock-screen');
+                const dismissBtn = document.getElementById('btn-dismiss-lock');
+
+                if (snapshot.exists()) {
+                    const intData = snapshot.val();
+                    
+                    if (isPlayerOnly) {
+                        lockScreen.style.display = 'flex';
+                        if(dismissBtn) dismissBtn.style.display = 'none';
+                        document.getElementById('lock-screen-title').innerText = "Сайт тимчасово заблоковано";
+                        document.getElementById('lock-screen-desc').innerText = "Сайт тимчасово заблоковано до завершення обзвону з метою збереження конфіденційності.";
+                        document.querySelector('.lock-icon-box').innerHTML = '<i class="fa-solid fa-user-lock" style="color:#ff3333;"></i>';
+                    }
+
+                    if (intData.interviewer === nick) {
+                        document.getElementById('interview-start-btn-box').style.display = 'none';
+                        document.getElementById('interview-active-box').style.display = 'flex';
+                        document.getElementById('active-candidate-nick').innerText = intData.candidate;
+
+                        const candSnap = await get(child(ref(db), `users/${intData.candidate}`));
+                        if (candSnap.exists()) {
+                            const candData = candSnap.val();
+                            const candRoles = Array.isArray(candData.roles) ? candData.roles : ['player'];
+                            let cRolesHtml = '';
+                            candRoles.forEach(r => {
+                                const rm = ROLE_MAP[r.toLowerCase()] || ROLE_MAP['player'];
+                                cRolesHtml += `<span class="role-badge ${rm.c}">${rm.icon} ${rm.l}</span>`;
+                            });
+                            document.getElementById('active-cand-roles-box').innerHTML = cRolesHtml;
+                        }
+
+                        if (!interviewTimerInterval) {
+                            interviewStartTime = intData.startTime;
+                            startTimerUI();
+                        }
+                    }
+                } else {
+                    if (interviewTimerInterval) {
+                        clearInterval(interviewTimerInterval);
+                        interviewTimerInterval = null;
+                    }
+                    document.getElementById('interview-start-btn-box').style.display = 'flex';
+                    document.getElementById('interview-active-box').style.display = 'none';
+
+                    if (isPlayerOnly) {
+                        lockScreen.style.display = 'none';
+                    }
+                }
+            });
+        }
+
+        function hexToRgba(hex, alpha) {
+            let c = hex.replace('#','');
+            if(c.length===3) c = c.split('').map(x => x+x).join('');
+            const num = parseInt(c,16);
+            return `rgba(${num>>16},${(num>>8)&255},${num&255},${alpha})`;
+        }
+
+        // КЕРУВАННЯ АКАУНТОМ
+        window.openAccountModal = function() { document.getElementById('accountModal').style.display = 'flex'; }
+        window.closeAccountModal = function() { document.getElementById('accountModal').style.display = 'none'; }
+        window.closeAccountModalOutside = function(e) { if (e.target.id === 'accountModal') closeAccountModal(); }
+
+        window.saveAccountChanges = async function() {
+            if (!currentUserNick) return;
+            const newAvatar = window._pickedAvatar || document.getElementById('acc-avatar-input').value.trim();
+            const newGlow = document.getElementById('acc-glow-color').value;
+
+            await set(ref(db, `users/${currentUserNick}/avatar`), newAvatar || DEFAULT_AVATAR);
+            await set(ref(db, `users/${currentUserNick}/glowColor`), newGlow);
+
+            document.documentElement.style.setProperty('--banner-glow', hexToRgba(newGlow, 0.45));
+            closeAccountModal();
+            window._pickedAvatar = null;
+            alert("Зміни успішно збережено!");
+        }
+        window._pickedAvatar = null;
+window.pickAvatar = function(inp) {
+    const f = inp.files && inp.files[0];
+    if (!f) return;
+    if (!f.type.startsWith('image/')) return alert('Оберіть зображення!');
+    const rd = new FileReader();
+    rd.onload = e => {
+        const img = new Image();
+        img.onload = () => {
+            const S = 160, c = document.createElement('canvas');
+            c.width = c.height = S;
+            const m = Math.min(img.width, img.height);
+            c.getContext('2d').drawImage(img, (img.width - m) / 2, (img.height - m) / 2, m, m, 0, 0, S, S);
+            window._pickedAvatar = c.toDataURL('image/jpeg', 0.85);
+            const p = document.getElementById('acc-avatar-preview');
+            p.src = window._pickedAvatar; p.style.display = 'block';
+        };
+        img.src = e.target.result;
+    };
+    rd.readAsDataURL(f);
+};
+
+        // ТЕХПІДТРИМКА / ЧАТ
+        window.openTechChatModal = function() { document.getElementById('techChatModal').style.display = 'flex'; }
+        window.closeTechChatModal = function() { document.getElementById('techChatModal').style.display = 'none'; }
+        window.closeTechChatModalOutside = function(e) { if (e.target.id === 'techChatModal') closeTechChatModal(); }
+
+        window.submitTechSupportRequest = async function() {
+            const discord = document.getElementById('tech-discord-input').value.trim();
+            const problem = document.getElementById('tech-problem-input').value.trim();
+
+            if (!discord || !problem) return alert("Заповніть всі поля анкети!");
+
+            await push(ref(db, 'tech_support'), {
+                nickname: currentUserNick || 'Гість',
+                discord: discord,
+                problem: problem,
+                time: Date.now()
+            });
+
+            document.getElementById('tech-discord-input').value = '';
+            document.getElementById('tech-problem-input').value = '';
+            closeTechChatModal();
+            alert("Ваше звернення успішно надіслано в техпідтримку!");
+        }
+
+    // ================= АНКЕТИ У ФРАКЦІЇ / ЗВЕРНЕННЯ =================
+const $ = id => document.getElementById(id);
+window.closeM = id => { $(id).style.display = 'none'; };
+const showM = id => { $(id).style.display = 'flex'; };
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fKey = n => n.replace(/[.#$\[\]\/]/g, '_');
+const rolesHtmlOf = r => (Array.isArray(r) ? r : ['player']).map(k => { const m = ROLE_MAP[String(k).toLowerCase().trim()] || ROLE_MAP.player; return `<span class="role-badge ${m.c}">${m.icon} ${m.l}</span>`; }).join('');
+const STATUS = {
+    pending:  { t: 'Очікує',       c: 'st-pending',  i: 'fa-hourglass-half' },
+    replied:  { t: 'Є відповідь',  c: 'st-replied',  i: 'fa-reply' },
+    approved: { t: 'Схвалено',     c: 'st-approved', i: 'fa-circle-check' },
+    rejected: { t: 'Відхилено',    c: 'st-rejected', i: 'fa-circle-xmark' }
+};
+const stBadge = s => { const x = STATUS[s] || STATUS.pending; return `<span class="st-badge ${x.c}"><i class="fa-solid ${x.i}"></i> ${x.t}</span>`; };
+
+// Фракції беруться з розділу "Фракції" (лише ті, де є лідер)
+function getFactions() {
+    const out = [];
+    document.querySelectorAll('#factionListScreen .faction-card-item').forEach(el => {
+        const m = (el.getAttribute('onclick') || '').match(/showLeaderInfo\('((?:[^'\\]|\\.)*)',\s*(null|'[^']*')/);
+        if (!m) return;
+        const name = m[1].replace(/\\'/g, "'");
+        out.push({ name, hasLeader: m[2] !== 'null', icon: (el.querySelector('i') || {}).className || 'fa-solid fa-shield-halved', key: fKey(name) });
+    });
+    return out;
+}
+
+function promptText(title, placeholder, required, cb) {
+    $('tp-title').innerText = title;
+    $('tp-text').value = ''; $('tp-text').placeholder = placeholder;
+    showM('textPromptModal');
+    $('tp-ok').onclick = async () => {
+        const v = $('tp-text').value.trim();
+        if (required && !v) return alert('Поле не може бути порожнім!');
+        closeM('textPromptModal');
+        await cb(v);
+    };
+}
+
+function initFactionFeatures(nick) {
+    // кнопка перевірки анкет лише для ролі "Лідер Фракції"
+    onValue(ref(db, `users/${nick}/roles`), snap => {
+        const roles = snap.exists() ? (Array.isArray(snap.val()) ? snap.val() : [snap.val()]) : [];
+        $('btn-review-apps').style.display = roles.includes('factionleader') ? 'inline-flex' : 'none';
+    });
+    // повідомлення про рішення (показується один раз)
+    onValue(ref(db, 'faction_applications'), snap => {
+        if (!snap.exists() || $('decisionModal').style.display === 'flex') return;
+        const all = snap.val();
+        for (const fk of Object.keys(all)) for (const id of Object.keys(all[fk])) {
+            const a = all[fk][id];
+            if (a.applicant === nick && (a.status === 'approved' || a.status === 'rejected') && !a.notified) {
+                return showDecision(`faction_applications/${fk}/${id}`, a);
+            }
+        }
+    });
+}
+
+let decisionPath = null;
+function showDecision(path, a) {
+    decisionPath = path;
+    const ok = a.status === 'approved';
+    $('dec-icon').innerHTML = ok ? '<i class="fa-solid fa-circle-check" style="color:#2ecc71"></i>' : '<i class="fa-solid fa-circle-xmark" style="color:#e74c3c"></i>';
+    $('dec-title').innerText = ok ? 'Анкету схвалено!' : 'Анкету відхилено';
+    $('dec-text').innerHTML = ok
+        ? `Вітаємо! Ваша анкета на вступ до <b style="color:var(--gold-light)">${esc(a.factionName)}</b> схвалена.`
+        : `На жаль, ваша анкета на вступ до <b style="color:var(--gold-light)">${esc(a.factionName)}</b> відхилена.`;
+    $('dec-reason').innerHTML = (!ok && a.reason) ? `<div class="reason-box"><b>Причина відхилення:</b><br>${esc(a.reason)}</div>` : '';
+    showM('decisionModal');
+}
+window.closeDecision = async function() {
+    closeM('decisionModal');
+    if (decisionPath) { const p = decisionPath; decisionPath = null; await set(ref(db, `${p}/notified`), true); }
+};
+
+// ----- Подача анкети -----
+const CHAT_CATS = ['Kids (до 8 років)', 'Select (9–12 років)', '13+', '17+', '18+'];
+function expQuestion(name) {
+    if (/Суд/.test(name)) return 'Чи є у вас досвід роботи в судових / юридичних структурах? (коротко)';
+    if (/ДСНС|МОЗ/.test(name)) return 'Чи є у вас досвід роботи в рятувальних / медичних фракціях? (коротко)';
+    return 'Чи є у вас досвід роботи в бойових фракціях (силових структурах)? (коротко)';
+}
+let applyFaction = null, applyFields = [];
+
+window.openApplyFactionsModal = function() {
+    const box = $('apply-factions-list'); box.innerHTML = '';
+    const list = getFactions().filter(f => f.hasLeader);
+    if (!list.length) box.innerHTML = '<div style="color:#888;text-align:center;padding:20px">Наразі немає фракцій з лідером</div>';
+    list.forEach(f => {
+        const d = document.createElement('div'); d.className = 'faction-card-item';
+        d.innerHTML = `<div class="faction-card-title"><i class="${f.icon}" style="color:var(--gold)"></i> ${esc(f.name)}</div><div class="faction-card-desc">Натисніть, щоб заповнити анкету</div>`;
+        d.onclick = () => openApplicationForm(f);
+        box.appendChild(d);
+    });
+    showM('applyFactionsModal');
+};
+
+function openApplicationForm(f) {
+    applyFaction = f;
+    $('app-faction-title').innerText = f.name;
+    $('app-sticker-l').className = `app-sticker ${f.icon}`;
+    $('app-sticker-r').className = `app-sticker ${f.icon}`;
+    applyFields = [
+        { id: 'a1', q: 'Ваше ім\'я в житті', t: 'text' },
+        { id: 'a2', q: 'Ваш вік у житті', t: 'number' },
+        { id: 'a3', q: 'Ваша активність (годин на день)', t: 'text' },
+        { id: 'a4', q: `Чому ви бажаєте вступити до лав: ${f.name}? (коротко)`, t: 'area' },
+        { id: 'a5', q: expQuestion(f.name), t: 'area' },
+        { id: 'a6', q: 'Чи є у вас Discord та змога говорити у войсі?', t: 'sel', o: ['Так, Discord є і можу говорити', 'Discord є, але говорити не можу', 'Discord немає'] },
+        { id: 'a7', q: 'Ваша вікова категорія чату Roblox', t: 'sel', o: CHAT_CATS },
+        { id: 'a8', q: 'Ваше знання правил серверу (0/10)', t: 'range' },
+        { id: 'a9', q: 'Скільки граєте на нашому сервері?', t: 'text' },
+        { id: 'a10', q: 'Ваша адекватність (0/10)', t: 'range' },
+        { id: 'a11', q: 'Ваш юзернейм та дисплей нік у Roblox', t: 'text' }
+    ];
+    const box = $('app-form-fields'); box.innerHTML = '';
+    applyFields.forEach((x, i) => {
+        let inp;
+        if (x.t === 'area') inp = `<textarea id="${x.id}" class="auth-input" rows="2" style="resize:none"></textarea>`;
+        else if (x.t === 'sel') inp = `<select id="${x.id}" class="auth-input">${x.o.map(o => `<option>${esc(o)}</option>`).join('')}</select>`;
+        else if (x.t === 'range') inp = `<input type="range" id="${x.id}" min="0" max="10" value="5" oninput="document.getElementById('${x.id}-v').innerText=this.value+'/10'"><span class="range-val" id="${x.id}-v">5/10</span>`;
+        else inp = `<input type="${x.t}" id="${x.id}" class="auth-input">`;
+        box.insertAdjacentHTML('beforeend', `<div class="app-field"><label>${i + 1}. ${esc(x.q)}</label>${inp}</div>`);
+    });
+    closeM('applyFactionsModal'); showM('applyFormModal');
+}
+
+window.submitApplication = async function() {
+    if (!currentUserNick || !applyFaction) return;
+    const answers = [];
+    for (const x of applyFields) {
+        let v = $(x.id).value.trim();
+        if (!v) return alert('Заповніть усі поля анкети!');
+        if (x.t === 'range') v += '/10';
+        answers.push({ q: x.q, a: v });
+    }
+    await push(ref(db, `faction_applications/${applyFaction.key}`), {
+        applicant: currentUserNick, factionName: applyFaction.name, answers,
+        status: 'pending', reason: '', notified: false, time: Date.now()
+    });
+    closeM('applyFormModal');
+    alert('Анкету успішно надіслано лідеру фракції!');
+};
+
+// ----- Перевірка анкет (лідер) -----
+let revF = null, revTab = 'pending';
+const showRev = s => { $('reviewScreenList').style.display = s === 'list' ? 'block' : 'none'; $('reviewScreenDetail').style.display = s === 'detail' ? 'block' : 'none'; };
+
+window.openReviewModal = async function() {
+    showM('reviewModal'); showRev('list');
+    const box = $('review-factions-list'); box.innerHTML = '<div style="color:#aaa">Завантаження...</div>';
+    const snap = await get(ref(db, 'faction_applications')); const all = snap.val() || {};
+    box.innerHTML = '';
+    getFactions().forEach(f => {
+        const n = Object.values(all[f.key] || {}).filter(a => a.status === 'pending').length;
+        const d = document.createElement('div'); d.className = 'faction-card-item';
+        d.innerHTML = `<div class="faction-card-title"><i class="${f.icon}" style="color:var(--gold)"></i> ${esc(f.name)} <span class="cnt-badge">${n}</span></div>`;
+        d.onclick = () => { revF = f; revTab = 'pending'; renderReview(); };
+        box.appendChild(d);
+    });
+};
+window.setRevTab = t => { revTab = t; renderReview(); };
+
+async function renderReview() {
+    showRev('detail');
+    $('review-faction-title').innerText = revF.name;
+    document.querySelectorAll('.rv-tab').forEach(b => b.classList.toggle('active', b.dataset.t === revTab));
+    const box = $('review-apps-list'); box.innerHTML = '<div style="color:#aaa">Завантаження...</div>';
+    const [aSnap, uSnap] = await Promise.all([get(ref(db, `faction_applications/${revF.key}`)), get(ref(db, 'users'))]);
+    const apps = aSnap.val() || {}, users = uSnap.val() || {};
+    const list = Object.keys(apps).map(id => ({ id, ...apps[id] })).filter(a => a.status === revTab).sort((x, y) => y.time - x.time);
+    box.innerHTML = '';
+    if (!list.length) return box.innerHTML = '<div style="color:#888;text-align:center;padding:25px">Анкет немає</div>';
+    list.forEach(a => {
+        const u = users[a.applicant] || {};
+        const card = document.createElement('div'); card.className = 'app-card';
+        card.innerHTML = `
+            <div class="app-card-user"><img src="${esc(u.avatar || DEFAULT_AVATAR)}" class="online-avatar">
+                <div class="online-info"><div class="online-nick">${esc(a.applicant)}</div><div>${rolesHtmlOf(u.roles)}</div></div>
+                <div style="margin-left:auto;text-align:right">${stBadge(a.status)}<div style="font-size:10px;color:#888;margin-top:4px">${new Date(a.time).toLocaleString()}</div></div></div>
+            ${(a.answers || []).map((x, i) => `<div class="app-qa"><b>${i + 1}. ${esc(x.q)}</b>${esc(x.a)}</div>`).join('')}
+            ${a.status === 'rejected' && a.reason ? `<div class="reason-box"><b>Причина:</b> ${esc(a.reason)}</div>` : ''}
+            ${a.status === 'pending' ? `<div class="app-actions"><button class="b-reject">Відхилити</button><button class="b-ok">Схвалити</button></div>` : ''}`;
+        if (a.status === 'pending') {
+            card.querySelector('.b-ok').onclick = async () => {
+                const p = `faction_applications/${revF.key}/${a.id}`;
+                await set(ref(db, `${p}/decidedBy`), currentUserNick); await set(ref(db, `${p}/notified`), false); await set(ref(db, `${p}/status`), 'approved'); logAction('application', a.applicant, 'Схвалено анкету у «' + revF.name + '»'); renderReview();
+            };
+            card.querySelector('.b-reject').onclick = () => promptText('Причина відхилення анкети', 'Вкажіть причину, її побачить гравець...', true, async reason => {
+                const p = `faction_applications/${revF.key}/${a.id}`;
+                await set(ref(db, `${p}/reason`), reason); await set(ref(db, `${p}/decidedBy`), currentUserNick); await set(ref(db, `${p}/notified`), false); await set(ref(db, `${p}/status`), 'rejected'); logAction('application', a.applicant, 'Відхилено анкету у «' + revF.name + '». Причина: ' + reason); renderReview();
+            });
+        }
+        box.appendChild(card);
+    });
+}
+
+// ----- Техпідтримка: адмін -----
+window.openTechSupportRequestsModal = async function() {
+    const container = $('tech-requests-list-container');
+    container.innerHTML = '<div style="color:#aaa;">Завантаження звернень...</div>';
+    showM('techRequestsModal');
+    const snapshot = await get(ref(db, 'tech_support'));
+    container.innerHTML = '';
+    if (!snapshot.exists()) return container.innerHTML = '<div style="color:#888;text-align:center;padding:20px">Нових звернень немає</div>';
+    const requests = snapshot.val();
+    Object.keys(requests).reverse().forEach(key => {
+        const r = requests[key], st = r.status || 'pending';
+        const card = document.createElement('div'); card.className = 'manage-user-card';
+        card.innerHTML = `
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+                <span style="font-weight:800;font-size:14px;color:var(--gold-light)">${esc(r.nickname)}</span>${stBadge(st)}</div>
+            <div style="font-size:10px;color:#888;margin-bottom:6px">${new Date(r.time).toLocaleString()}</div>
+            <div style="font-size:12px;color:#5865F2;font-weight:700;margin-bottom:6px"><i class="fa-brands fa-discord"></i> ${esc(r.discord)}</div>
+            <div style="font-size:12px;color:#dcdcdc;background:rgba(0,0,0,.4);padding:10px;border-radius:8px">${esc(r.problem)}</div>
+            ${r.reply ? `<div class="reply-box"><b>Ваша відповідь:</b><br>${esc(r.reply)}</div>` : ''}
+            <div class="tech-actions">
+                <button class="b-neutral" data-a="acc"><i class="fa-solid fa-user"></i> Акаунт</button>
+                <button class="b-reject" data-a="rej">Відхилити</button>
+                <button class="b-reply" data-a="rep">Відповісти</button>
+                <button class="b-ok" data-a="ok">Схвалити</button>
+                <button class="b-neutral" data-a="del" style="flex:0 0 auto"><i class="fa-solid fa-trash"></i></button>
+            </div>`;
+        const on = (a, fn) => card.querySelector(`[data-a="${a}"]`).onclick = fn;
+        on('acc', () => openAccountView(r.nickname));
+        on('rej', async () => { await set(ref(db, `tech_support/${key}/status`), 'rejected'); openTechSupportRequestsModal(); });
+        on('ok', async () => { await set(ref(db, `tech_support/${key}/status`), 'approved'); openTechSupportRequestsModal(); });
+        on('rep', () => promptText('Відповідь на звернення', 'Напишіть відповідь гравцю...', true, async text => {
+            await set(ref(db, `tech_support/${key}/reply`), text);
+            await set(ref(db, `tech_support/${key}/replySeen`), false);
+            await set(ref(db, `tech_support/${key}/status`), 'replied');
+            openTechSupportRequestsModal();
+        }));
+        on('del', async () => { if (confirm('Видалити звернення?')) { await remove(ref(db, `tech_support/${key}`)); openTechSupportRequestsModal(); } });
+        container.appendChild(card);
+    });
+};
+
+window.openAccountView = async function(nick) {
+    const box = $('account-view-box');
+    box.innerHTML = '<div style="color:#aaa">Завантаження...</div>'; showM('accountViewModal');
+    const snap = await get(ref(db, `users/${nick}`));
+    if (!snap.exists()) return box.innerHTML = '<div style="color:#e74c3c;font-weight:800">Акаунт не знайдено (гість або видалений)</div>';
+    const u = snap.val();
+    box.innerHTML = `<img src="${esc(u.avatar || DEFAULT_AVATAR)}" style="width:80px;height:80px;border-radius:50%;border:2px solid var(--gold);object-fit:cover;margin-bottom:10px">
+        <div class="leader-nick-title">${esc(u.nickname)}</div><div style="margin:8px 0">${rolesHtmlOf(u.roles)}</div>
+        <div style="font-size:12px;color:#aaa">Вік: <b style="color:#fff">${esc(u.age || '—')}</b></div>`;
+};
+
+// ----- Мої звернення (гравець) -----
+window.openMyRequests = async function() {
+    if (!currentUserNick) return alert('Спочатку увійдіть в акаунт!');
+    const box = $('my-requests-list'); box.innerHTML = '<div style="color:#aaa">Завантаження...</div>';
+    showM('myRequestsModal');
+    const snap = await get(ref(db, 'tech_support')); const all = snap.val() || {};
+    const mine = Object.values(all).filter(r => r.nickname === currentUserNick).sort((a, b) => b.time - a.time);
+    box.innerHTML = '';
+    if (!mine.length) return box.innerHTML = '<div style="color:#888;text-align:center;padding:25px">У вас ще немає звернень</div>';
+    ['replied', 'pending', 'approved', 'rejected'].forEach(s => {
+        const items = mine.filter(r => (r.status || 'pending') === s);
+        if (!items.length) return;
+        box.insertAdjacentHTML('beforeend', `<div class="my-group-title">${stBadge(s)} <span style="color:#888">(${items.length})</span></div>`);
+        items.forEach(r => box.insertAdjacentHTML('beforeend', `
+            <div class="app-card" style="margin-bottom:10px">
+                <div style="display:flex;justify-content:space-between;font-size:10px;color:#888;margin-bottom:8px"><span><i class="fa-brands fa-discord"></i> ${esc(r.discord)}</span><span>${new Date(r.time).toLocaleString()}</span></div>
+                <div style="font-size:12px;color:#dcdcdc">${esc(r.problem)}</div>
+                ${r.reply ? `<div class="reply-box"><b><i class="fa-solid fa-headset"></i> Відповідь техпідтримки:</b><br>${esc(r.reply)}</div>` : ''}
+            </div>`));
+    });
+};
+
+        window.closeTechRequestsModal = function() { document.getElementById('techRequestsModal').style.display = 'none'; }
+        window.closeTechRequestsModalOutside = function(e) { if (e.target.id === 'techRequestsModal') closeTechRequestsModal(); }
+
+        window.deleteTechRequest = async function(reqKey) {
+            await remove(ref(db, `tech_support/${reqKey}`));
+            openTechSupportRequestsModal();
+        }
+
+        window.openManageRolesModal = async function() {
+            const container = document.getElementById('manage-users-list-container');
+            container.innerHTML = '<div style="color:#aaa;">Завантаження користувачів...</div>';
+            document.getElementById('manageRolesModal').style.display = 'flex';
+
+            const snapshot = await get(child(ref(db), 'users'));
+            container.innerHTML = '';
+            if (snapshot.exists()) {
+                const users = snapshot.val();
+                Object.keys(users).forEach(uKey => {
+                    const u = users[uKey];
+                    const userRoles = Array.isArray(u.roles) ? u.roles : ['player'];
+
+                    const card = document.createElement('div');
+                    card.className = 'manage-user-card';
+                    
+                    let rolesButtonsHtml = '';
+                    Object.keys(ROLE_MAP).forEach(rKey => {
+                        const hasRole = userRoles.includes(rKey);
+                        rolesButtonsHtml += `<button class="role-toggle-btn ${hasRole ? 'active' : ''}" onclick="toggleUserRole('${uKey}', '${rKey}', this)">${ROLE_MAP[rKey].l}</button>`;
+                    });
+
+                    card.innerHTML = `
+                        <div style="font-weight: 800; font-size: 14px; color: var(--gold-light); margin-bottom: 6px;">${u.nickname}</div>
+                        <div style="font-size: 11px; color: #888;">Доступні ролі:</div>
+                        <div class="manage-roles-row">${rolesButtonsHtml}</div>
+                    `;
+                    container.appendChild(card);
+                });
+            }
+        }
+
+        window.toggleUserRole = async function(targetUser, roleKey, btnElement) {
+            const userRef = ref(db, `users/${targetUser}/roles`);
+            const snap = await get(userRef);
+            let roles = snap.exists() ? snap.val() : ['player'];
+            if (!Array.isArray(roles)) roles = [roles];
+
+            if (roles.includes(roleKey)) {
+                if (roles.length > 1) {
+                    roles = roles.filter(r => r !== roleKey);
+                    btnElement.classList.remove('active');
+                } else {
+                    alert("У користувача має залишитись хоча б одна роль!");
+                    return;
+                }
+            } else {
+                roles.push(roleKey);
+                btnElement.classList.add('active');
+            }
+
+            await set(userRef, roles);
+logAction('role', targetUser, (roles.includes(roleKey) ? 'Видано роль: ' : 'Знято роль: ') + ROLE_MAP[roleKey].l);
+        }
+
+        window.closeManageRolesModal = function() { document.getElementById('manageRolesModal').style.display = 'none'; }
+        window.closeManageRolesModalOutside = function(e) { if (e.target.id === 'manageRolesModal') closeManageRolesModal(); }
+
+        window.openSelectCandidateModal = async function() {
+            const container = document.getElementById('candidates-container');
+            container.innerHTML = '<div style="color:#aaa;">Завантаження...</div>';
+            document.getElementById('selectCandidateModal').style.display = 'flex';
+
+            const snapshot = await get(child(ref(db), 'users'));
+            container.innerHTML = '';
+            if (snapshot.exists()) {
+                const users = snapshot.val();
+                Object.keys(users).forEach(uKey => {
+                    if (uKey !== currentUserNick) {
+                        const btn = document.createElement('div');
+                        btn.className = 'candidate-item-btn';
+                        btn.innerHTML = `<span><i class="fa-solid fa-user" style="color:var(--gold); margin-right:8px;"></i> ${uKey}</span> <i class="fa-solid fa-chevron-right" style="font-size:12px; color:#888;"></i>`;
+                        btn.onclick = () => startInterviewWith(uKey);
+                        container.appendChild(btn);
+                    }
+                });
+            }
+        }
+
+        window.startInterviewWith = async function(candidateNick) {
+            closeSelectCandidateModal();
+            await set(ref(db, `users/${candidateNick}/interview_status`), 'in_progress');
+            await set(ref(db, 'active_interview'), {
+                interviewer: currentUserNick,
+                candidate: candidateNick,
+                startTime: Date.now()
+            });
+        }
+
+        function startTimerUI() {
+            interviewTimerInterval = setInterval(() => {
+                const elapsed = Math.floor((Date.now() - interviewStartTime) / 1000);
+                const m = String(Math.floor(elapsed / 60)).padStart(2, '0');
+                const s = String(elapsed % 60).padStart(2, '0');
+                document.getElementById('interview-timer').innerText = `${m}:${s}`;
+            }, 1000);
+        }
+
+        window.openTestGeneratorModal = function() {
+            const container = document.getElementById('test-questions-list-container');
+            container.innerHTML = '';
+            const shuffled = [...ALL_POSSIBLE_QUESTIONS].sort(() => 0.5 - Math.random());
+            shuffled.slice(0, 20).forEach((q, index) => {
+                const item = document.createElement('div');
+                item.className = 'test-question-item';
+                item.innerHTML = `
+                    <div style="display:flex; align-items:center; gap:12px; flex:1;">
+                        <input type="checkbox" class="test-checkbox-input" data-score="${q.score}">
+                        <div class="test-question-text"><b>${index + 1}.</b> ${q.text}</div>
+                    </div>
+                    <div class="test-question-score-badge">+${q.score} бал.</div>
+                `;
+                container.appendChild(item);
+            });
+            document.getElementById('testGeneratorModal').style.display = 'flex';
+        }
+
+        window.calculateTestResults = function() {
+            const checkboxes = document.querySelectorAll('.test-checkbox-input');
+            let earned = 0, max = 0;
+            checkboxes.forEach(cb => {
+                const s = parseFloat(cb.getAttribute('data-score'));
+                max += s;
+                if (cb.checked) earned += s;
+            });
+            closeTestGeneratorModal();
+            const pct = (earned / max) * 100;
+            let rec = pct >= 75 ? "Чудові знання правил!" : pct >= 50 ? "Базові знання присутні." : "Слабкий результат.";
+            document.getElementById('test-result-stats-text').innerText = `Набрано: ${earned.toFixed(1)} з ${max.toFixed(1)} (${pct.toFixed(0)}%)`;
+            document.getElementById('test-result-recommendation').innerText = rec;
+            document.getElementById('testResultModal').style.display = 'flex';
+        }
+
+        window.closeTestResultModal = function() { document.getElementById('testResultModal').style.display = 'none'; }
+        window.openResultChoiceModal = function() { document.getElementById('resultChoiceModal').style.display = 'flex'; }
+        window.closeResultChoiceModal = function() { document.getElementById('resultChoiceModal').style.display = 'none'; }
+
+        window.setInterviewVerdict = async function(verdict) {
+            const intSnap = await get(child(ref(db), 'active_interview'));
+            if (intSnap.exists()) {
+                await remove(ref(db, 'active_interview'));
+                closeResultChoiceModal();
+                alert(`Обзвон завершено!`);
+            }
+        }
+
+        // ВІКНО АДМІНІСТРАЦІЇ (СОРТУВАННЯ ПО ЗРОСТАННЮ РАНГУ)
+        window.openHighAdminModal = async function() {
+            const container = document.getElementById('high-admins-container');
+            container.innerHTML = '<div style="color:#aaa;">Завантаження...</div>';
+            document.getElementById('highAdminModal').style.display = 'flex';
+
+            const snapshot = await get(child(ref(db), 'users'));
+            container.innerHTML = '';
+            if (snapshot.exists()) {
+                const users = snapshot.val();
+                let adminList = [];
+
+                Object.keys(users).forEach(uKey => {
+                    const u = users[uKey];
+                    const roles = Array.isArray(u.roles) ? u.roles : ['player'];
+                    let maxRank = 0;
+                    let rolesHtml = '';
+
+                    roles.forEach(r => {
+                        const rKey = r.toLowerCase().trim();
+                        const rm = ROLE_MAP[rKey] || ROLE_MAP['player'];
+                        if (rm.rank > maxRank) maxRank = rm.rank;
+                        rolesHtml += `<span class="role-badge ${rm.c}">${rm.icon} ${rm.l}</span>`;
+                    });
+
+                    // Показуємо усіх, хто має ранг вище ніж звичайний гравець (rank > 1)
+                    if (maxRank > 1) {
+                        adminList.push({ uKey, u, maxRank, rolesHtml });
+                    }
+                });
+
+                // Сортування по зростанню рангу (від Trainee до Owner)
+                adminList.sort((a, b) => a.maxRank - b.maxRank);
+
+                adminList.forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'admin-card-item';
+                    card.innerHTML = `
+                        <div style="display:flex; align-items:center; gap:12px;">
+                            <img src="${item.u.avatar || DEFAULT_AVATAR}" style="width:36px; height:36px; border-radius:50%; border:1px solid var(--gold);">
+                            <span style="font-weight:800; font-size:14px;">${item.u.nickname}</span>
+                        </div>
+                        <div>${item.rolesHtml}</div>
+                    `;
+                    container.appendChild(card);
+                });
+            }
+        }
+
+        window.logoutUser = function() {
+            if (confirm("Бажаєте вийти з акаунта?")) {
+                if (currentUserNick) remove(ref(db, `online/${currentUserNick}`));
+                localStorage.removeItem('elite_rp_user');
+                location.reload();
+            }
+        }
+        // ================= СПОВІЩЕННЯ / ЖУРНАЛ / ІСТОРІЯ ОБЗВОНІВ =================
+function setDot(el, n) {
+    if (!el) return;
+    let d = el.querySelector('.notif-dot');
+    if (!n) { if (d) d.remove(); return; }
+    if (!d) { d = document.createElement('span'); d.className = 'notif-dot'; el.appendChild(d); }
+    d.textContent = n > 9 ? '9+' : n;
+}
+
+function initExtras(nick) {
+    // техпідтримка: адміну крапка з кількістю нових, гравцю крапка про нову відповідь
+    onValue(ref(db, 'tech_support'), s => {
+        const list = Object.values(s.val() || {});
+        setDot(document.getElementById('btn-tech-support-main'), list.filter(r => !r.status || r.status === 'pending').length);
+        setDot(document.querySelector('.floating-chat-btn'), list.filter(r => r.nickname === nick && r.reply && r.replySeen === false).length);
+    });
+    // анкети: лідеру крапка з кількістю заявок на розгляді
+    onValue(ref(db, 'faction_applications'), s => {
+        let n = 0;
+        Object.values(s.val() || {}).forEach(f => Object.values(f || {}).forEach(a => { if (a.status === 'pending') n++; }));
+        setDot(document.getElementById('btn-review-apps'), n);
+    });
+    // хто бачить журнал та історію
+    onValue(ref(db, `users/${nick}/roles`), s => {
+        const r = s.exists() ? (Array.isArray(s.val()) ? s.val() : [s.val()]) : [];
+        const has = list => r.some(x => list.includes(x));
+        document.getElementById('btn-ihistory').style.display =
+            has(['trainee','junioradmin','admin','senioradmin','headadmin','deputyheadadmin','deputyowner','techadmin','owner']) ? 'inline-flex' : 'none';
+        document.getElementById('btn-journal').style.display =
+            has(['admin','senioradmin','headadmin','deputyheadadmin','deputyowner','techadmin','owner']) ? 'inline-flex' : 'none';
+    });
+}
+
+window.markRepliesSeen = async function() {
+    const all = (await get(ref(db, 'tech_support'))).val() || {};
+    for (const k of Object.keys(all)) {
+        const r = all[k];
+        if (r.nickname === currentUserNick && r.reply && r.replySeen === false) await set(ref(db, `tech_support/${k}/replySeen`), true);
+    }
+};
+
+// ----- Журнал дій -----
+window.logAction = function(type, target, text) {
+    push(ref(db, 'action_log'), { time: Date.now(), actor: currentUserNick || '?', type, target: target || '', text });
+};
+
+let journalFilter = 'all', journalCache = [];
+window.openJournal = async function() {
+    showM('journalModal');
+    $('journal-list').innerHTML = '<div class="news-empty">Завантаження...</div>';
+    const snap = await get(ref(db, 'action_log'));
+    journalCache = Object.values(snap.val() || {}).sort((a, b) => b.time - a.time).slice(0, 150);
+    renderJournal();
+};
+window.setJournalFilter = f => { journalFilter = f; renderJournal(); };
+function renderJournal() {
+    document.querySelectorAll('.jf-tab').forEach(b => b.classList.toggle('active', b.dataset.f === journalFilter));
+    const ICON = { role: ['fa-user-gear', '#ff7700'], interview: ['fa-headset', '#0072ff'], application: ['fa-file-signature', '#13a8b3'] };
+    const rows = journalCache.filter(l => journalFilter === 'all' || l.type === journalFilter).map(l => {
+        const ic = ICON[l.type] || ['fa-circle-info', '#aaa'];
+        return `<div class="news-row">
+            <i class="fa-solid ${ic[0]}" style="color:${ic[1]};font-size:18px;width:24px;text-align:center"></i>
+            <div style="flex:1;min-width:180px;font-size:12px"><b style="color:var(--gold-light)">${esc(l.actor)}</b>${l.target ? ` → <b>${esc(l.target)}</b>` : ''}
+                <div style="color:#bbb;margin-top:3px">${esc(l.text)}</div></div>
+            <div class="log-time">${new Date(l.time).toLocaleString('uk-UA')}</div></div>`;
+    });
+    $('journal-list').innerHTML = rows.join('') || '<div class="news-empty">Записів немає</div>';
+}
+
+// ----- Історія обзвонів -----
+window.openInterviewHistory = async function() {
+    showM('historyModal');
+    const box = $('history-list'); box.innerHTML = '<div class="news-empty">Завантаження...</div>';
+    const snap = await get(ref(db, 'interview_history'));
+    const list = Object.values(snap.val() || {}).sort((a, b) => b.time - a.time).slice(0, 100);
+    box.innerHTML = list.map(h => {
+        const ok = h.verdict === 'passed';
+        const score = (h.max != null && h.max > 0)
+            ? `${Number(h.earned).toFixed(1)} / ${Number(h.max).toFixed(1)} (${Math.round(h.earned / h.max * 100)}%)` : 'тест не проводився';
+        const dur = h.duration != null ? `${Math.floor(h.duration / 60)} хв ${h.duration % 60} с` : '—';
+        return `<div class="news-row">
+            <div style="flex:1;min-width:170px">
+                <div class="online-nick"><i class="fa-solid fa-user" style="color:var(--gold)"></i> ${esc(h.candidate)}</div>
+                <div class="news-by" style="margin-top:3px">Проводив: <b>${esc(h.interviewer)}</b></div></div>
+            <div style="font-size:12px;color:#ddd"><i class="fa-solid fa-star" style="color:var(--gold)"></i> ${score}<br>
+                <span style="color:#888"><i class="fa-regular fa-clock"></i> ${dur}</span></div>
+            <div style="text-align:right">
+                <span class="st-badge ${ok ? 'st-approved' : 'st-rejected'}"><i class="fa-solid ${ok ? 'fa-circle-check' : 'fa-circle-xmark'}"></i> ${ok ? 'Пройдено' : 'Не пройдено'}</span>
+                <div class="log-time" style="margin-top:4px">${new Date(h.time).toLocaleString('uk-UA')}</div></div></div>`;
+    }).join('') || '<div class="news-empty">Обзвонів ще не було</div>';
+};
+
+// Завершення обзвону: тепер зберігає історію й пише в журнал
+window.setInterviewVerdict = async function(verdict) {
+    const intSnap = await get(child(ref(db), 'active_interview'));
+    if (!intSnap.exists()) return;
+    const iv = intSnap.val();
+    const boxes = document.querySelectorAll('.test-checkbox-input');
+    let earned = null, max = null;
+    if (boxes.length) {
+        earned = 0; max = 0;
+        boxes.forEach(cb => { const s = parseFloat(cb.getAttribute('data-score')); max += s; if (cb.checked) earned += s; });
+    }
+    await push(ref(db, 'interview_history'), {
+        time: Date.now(), interviewer: iv.interviewer, candidate: iv.candidate, verdict, earned, max,
+        duration: Math.round((Date.now() - iv.startTime) / 1000)
+    });
+    logAction('interview', iv.candidate, 'Завершено обзвон: ' + (verdict === 'passed' ? 'пройдено' : 'не пройдено'));
+    document.getElementById('test-questions-list-container').innerHTML = '';
+    await remove(ref(db, 'active_interview'));
+    closeResultChoiceModal();
+    alert('Обзвон завершено!');
+};
+       document.addEventListener('DOMContentLoaded', () => {
+    // 1. Блокування контекстного меню (права кнопка миші)
+    document.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+    });
+
+    // 2. Блокування гарячих клавіш (F12, Ctrl+U, Ctrl+Shift+I тощо)
+    document.addEventListener('keydown', (e) => {
+        // Заборона клавіші F12
+        if (e.key === 'F12') {
+            e.preventDefault();
+            return false;
+        }
+
+        // Заборона Ctrl + Shift + I (Developer Tools)
+        // Заборона Ctrl + Shift + J (Console)
+        // Заборона Ctrl + Shift + C (Inspect Element)
+        if (e.ctrlKey && e.shiftKey && ['I', 'J', 'C'].includes(e.key.toUpperCase())) {
+            e.preventDefault();
+            return false;
+        }
+
+        // Заборона Ctrl + U (Перегляд джерельного коду сторінки)
+        if (e.ctrlKey && e.key.toUpperCase() === 'U') {
+            e.preventDefault();
+            return false;
+        }
+
+        // Заборона Ctrl + S (Збереження сторінки) - опціонально
+        if (e.ctrlKey && e.key.toUpperCase() === 'S') {
+            e.preventDefault();
+            return false;
+        }
+    });
+});
+        
+        document.addEventListener('selectstart', function(e) { e.preventDefault(); });
+    </script>
+
+    <script>
+        window.dismissLockScreen = async function() {
+            document.getElementById('interview-lock-screen').style.display = 'none';
+        }
+        function openSupportModal() { document.getElementById('supportModal').style.display = 'flex'; }
+        function closeSupportModal() { document.getElementById('supportModal').style.display = 'none'; }
+        function closeSupportModalOutside(e) { if (e.target.id === 'supportModal') closeSupportModal(); }
+        
+        function copyCardNumber() { navigator.clipboard.writeText("4874070020072490").then(() => alert("Реквізити скопійовано!")); }
+        function copyServerCode() { navigator.clipboard.writeText("pv6ccs55").then(() => alert("Код сервера скопійовано!")); }
+
+        function openServerModal() { document.getElementById('serverModal').style.display = 'flex'; }
+        function closeServerModal() { document.getElementById('serverModal').style.display = 'none'; }
+        function closeServerModalOutside(e) { if (e.target.id === 'serverModal') closeServerModal(); }
+
+        function openRulesModal() { document.getElementById('rulesModal').style.display = 'flex'; }
+        function closeRulesModal() { document.getElementById('rulesModal').style.display = 'none'; }
+        function closeRulesModalOutside(e) { if (e.target.id === 'rulesModal') closeRulesModal(); }
+
+        function openFactionsModal() { backToFactionsList(); document.getElementById('factionsModal').style.display = 'flex'; }
+        function closeFactionsModal() { document.getElementById('factionsModal').style.display = 'none'; }
+        function closeFactionsModalOutside(e) { if (e.target.id === 'factionsModal') closeFactionsModal(); }
+
+        function closeSelectCandidateModal() { document.getElementById('selectCandidateModal').style.display = 'none'; }
+        function closeSelectCandidateModalOutside(e) { if (e.target.id === 'selectCandidateModal') closeSelectCandidateModal(); }
+
+        function closeHighAdminModal() { document.getElementById('highAdminModal').style.display = 'none'; }
+        function closeHighAdminModalOutside(e) { if (e.target.id === 'highAdminModal') closeHighAdminModal(); }
+
+        function closeTestGeneratorModal() { document.getElementById('testGeneratorModal').style.display = 'none'; }
+        function closeTestGeneratorModalOutside(e) { if (e.target.id === 'testGeneratorModal') closeTestGeneratorModal(); }
+
+        function showLeaderInfo(name, nick, dc) {
+            document.getElementById('factionListScreen').style.display = 'none';
+            document.getElementById('hierarchyScreen').style.display = 'none';
+            document.getElementById('factionLeaderScreen').style.display = 'block';
+            document.getElementById('displayFactionName').innerText = name;
+            
+            const box = document.getElementById('leaderDetailBox');
+            if (nick) {
+                box.innerHTML = `<div class="leader-avatar-icon"><i class="fa-solid fa-user-tie"></i></div>
+                    <div style="font-size: 11px; color: #888; text-transform: uppercase; font-weight: 700;">Лідер фракції</div>
+                    <div class="leader-nick-title">${nick}</div>
+                    <div class="leader-discord-tag"><i class="fa-brands fa-discord"></i> ${dc}</div>`;
+            } else {
+                box.innerHTML = `<div class="leader-avatar-icon" style="color: #666;"><i class="fa-solid fa-user-slash"></i></div>
+                    <div class="leader-nick-title" style="color: #e74c3c; font-size: 20px;">Фракція без лідера</div>
+                    <p style="font-size: 12px; color: #aaa; margin-top: 8px;">Наразі ця посада вакантна. Ви можете подати заявку на посаду лідера!</p>`;
+            }
+        }
+
+        function showHierarchyScreen() {
+            document.getElementById('factionListScreen').style.display = 'none';
+            document.getElementById('factionLeaderScreen').style.display = 'none';
+            document.getElementById('hierarchyScreen').style.display = 'block';
+        }
+
+        function backToFactionsList() {
+            document.getElementById('factionLeaderScreen').style.display = 'none';
+            document.getElementById('hierarchyScreen').style.display = 'none';
+            document.getElementById('factionListScreen').style.display = 'block';
+        }
+        const LOOK = { a:'а', c:'с', e:'е', i:'і', k:'к', m:'м', o:'о', p:'р', t:'т', x:'х', h:'н', b:'в' };
+function normSearch(s) {
+    return String(s).toLowerCase().replace(/[aceikmoptxhb]/g, ch => LOOK[ch]).replace(/\s+/g, ' ').trim();
+}
+function searchRules() {
+    const q = normSearch(document.getElementById('rules-search').value);
+    let any = false;
+    document.querySelectorAll('#rulesModal .rule-category').forEach(cat => {
+        const titleHit = !q || normSearch(cat.querySelector('h3').textContent).includes(q);
+        let vis = 0;
+        cat.querySelectorAll('.rule-item').forEach(it => {
+            const hit = titleHit || normSearch(it.textContent).includes(q);
+            it.style.display = hit ? '' : 'none';
+            if (hit) vis++;
+        });
+        cat.style.display = vis ? '' : 'none';
+        if (vis) any = true;
+    });
+    document.getElementById('rules-empty').style.display = any ? 'none' : 'block';
+}
+
+        /* ===== ТЕМА UKRAINE RP: іконки та підказки бічного меню ===== */
+        (function(){
+          var MAP={'Головна':'fa-house','Правила':'fa-book','Фракції':'fa-users','Адміністрація':'fa-shield-halved'};
+          document.querySelectorAll('.nav-links a').forEach(function(a){
+            var t=a.textContent.trim();
+            if(MAP[t]){a.setAttribute('data-tooltip',t);a.innerHTML='<i class="fa-solid '+MAP[t]+'"></i>';}
+            a.addEventListener('click',function(){
+              document.querySelectorAll('.nav-links a').forEach(function(x){x.classList.remove('active')});
+              a.classList.add('active');
+            });
+          });
+        })();
+        /* ===== ПІЧЕНЬКА ===== */
+const FORTUNES = [
+ "Вітаємо в Elite RP! Нехай сьогодні твоя історія в місті буде яскравою.",
+ "Бажаємо чесних відіграшок і жодного RDM. Гарного дня в Elite RP!",
+ "Нехай сьогодні тобі пощастить: найкращі патрулі, швидкі виклики й вдячні пацієнти.",
+ "Побажання дня: поважай правила, і місто поважатиме тебе.",
+ "Хай сьогодні на сервері буде багато цікавих зустрічей і вдалих RP-сцен.",
+ "Твоя роль чекає на тебе. Вона точно сьогодні тобі вдасться!",
+ "Нехай штрафи обходять тебе стороною, а друзі знаходять скрізь.",
+ "Бажаємо ідеального пінгу й тільки гарних івентів у Elite RP.",
+ "Нехай кожна відіграшка сьогодні буде такою, що її згадають завтра.",
+ "Успіху в анкеті у фракцію! Лідер уже відкриває твою заявку."
+];
+function dayKey(){const d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()}
+function untilTomorrow(){
+  const n=new Date(),t=new Date(n.getFullYear(),n.getMonth(),n.getDate()+1),ms=t-n;
+  return Math.floor(ms/3600000)+' год '+Math.floor(ms%3600000/60000)+' хв';
+}
+function openCookie(){
+  const key='elite_cookie_'+(localStorage.getItem('elite_rp_user')||'guest');
+  let saved=null;
+  try{saved=JSON.parse(localStorage.getItem(key))}catch(e){}
+  const el=document.getElementById('fortuneText');
+  if(saved&&saved.day===dayKey()){
+    el.innerHTML=saved.text+'<br><small style="font-family:Montserrat;font-weight:600;color:#8a5a00;display:block;margin-top:12px;letter-spacing:0;text-transform:none">Сьогодні ви вже відкрили печиво. Нове буде через '+untilTomorrow()+'.</small>';
+  }else{
+    const text=FORTUNES[Math.floor(Math.random()*FORTUNES.length)];
+    localStorage.setItem(key,JSON.stringify({day:dayKey(),text:text}));
+    el.innerText=text;
+  }
+  const b=document.getElementById('fortuneBackdrop');
+  b.classList.remove('open'); void b.offsetWidth; b.classList.add('open');
+}
+function closeCookie(){ document.getElementById('fortuneBackdrop').classList.remove('open'); }
+/* ===== ПРАВИЛА ===== */
+// рядок: "текст|покарання"
+const mk=(title,list)=>({title,html:'<h2>'+title+'</h2>'+list.map(s=>{const[a,b]=s.split('|');return '<p>'+a+'</p>'+(b?'<span class="penalty">'+b+'</span>':'')+'<hr>'}).join('')});
+const DG='Догана працівнику', ZV='Звільнення з поліції';
+/* ===== ПРАВИЛА НА ГОЛОВНІЙ ===== */
+const HOME_RULES = [
+mk('Регламент адміністрації',[
+ '<b>1.1 Статус.</b> Адміністратор — OOC-представник проєкту: стежить за правилами, допомагає гравцям, розглядає скарги. Він не гравець із привілеями, його дії мають бути об’єктивними.',
+ '<b>Адмін-режим:</b> розгляд репортів, нагляд за порушеннями, допомога гравцям, адмін-команди лише для служби.',
+ '<b>Ігровий режим:</b> заборонено адмін-команди заради переваги, службова інформація, Fly, NoClip, Teleport, Watch, Spectate, Broadcast, Vanish, Admin Transport в особистих цілях, втручання в RP без потреби. Змішувати режими заборонено.|Догана / сувора догана / зняття',
+ '<b>1.2 Обов’язки:</b> дотримуватись правил, бути ввічливим, вчасно відповідати на репорти, карати лише за правилами, зберігати нейтралітет, поважати керівництво.|Догана',
+ '<b>1.3 Заборонено:</b> зловживати повноваженнями, карати без причини, видавати/знімати покарання знайомим, передавати службову інформацію, ображати гравців, ігнорувати репорти, писати в теми не по темі.|Сувора догана / зняття',
+ 'Якщо в правилах немає потрібного пункту, адміністратор може сам визначити покарання.'
+]),
+mk('RP терміни та валюта',[
+ '<b>Валюта.</b> Усе, що в грі відображається як євро (€), у RP вважається гривнею (₴).',
+ '<b>NonRP</b> — дії всупереч логіці та фізиці (стрибки з дахів заради розваги, біг/стрільба зі стрибками).|Попередження або Kick',
+ '<b>RDM</b> — шкода або вбивство без RP-причини та активної RP-ситуації.|Бан 1–3 дні',
+ '<b>VDM</b> — навмисне збивання чи регулярний таран авто без RP-причини.|Попередження або Kick',
+ '<b>MG</b> — використання OOC-інформації (Telegram, стріми, особисті повідомлення, адмін-чати) у грі.|Попередження або Kick',
+ '<b>PG</b> — перебільшення можливостей персонажа (кулаки проти зброї, 1 патрульний проти 4 бандитів).|Бан 1–3 дні',
+ '<b>FearRP</b> — обов’язок відігравати страх за життя. Вимоги, що порушують правила чи механіку гри, виконувати не потрібно.|Бан 1–3 дні',
+ '<b>TWD</b> — розмови в тяжкопораненому стані, образи чи погрози лежачи.|Попередження',
+ '<b>Cuff Rush</b> — миттєві кайданки без RP-причини. Лише після фіксації порушення за КК і усного попередження.|Бан 1 день',
+ '<b>Cuff Rush + Auto Jail</b> — кайданки і одразу в’язниця без суду. Затримання має йти за етапами ПК.|Бан 2 дні',
+ '<b>NonRP Cop</b> — порушення правил і ПК працівником Патрульної чи Дорожньої поліції.|Попередження',
+ '<b>Ухід від RP</b> — навмисний вихід або AFK під час затримання, погоні, суду, перестрілки, пограбування. Випадковий виліт не порушення, якщо гравець повернувся.|Бан 7 днів',
+ '<b>NLR</b> — після смерті забуваєте обставини і не повертаєтесь на місце загибелі 10 хвилин.|Попередження або Kick',
+ '<b>GTA Driving (NRD)</b> — хаотична їзда: тарани стовпів і парканів, спорткари по горах і полях, стрибки з обривів.|Попередження або Kick',
+ '<b>Абуз скутера</b> — втеча на скутері від поліції під час розшуку, погоні чи затримання.|Попередження або Kick'
+]),
+mk('ПДР 🚦',[
+ '1.1 Проїзд на червоне світло|Штраф 2000 ₴',
+ '1.2 Ігнорування дорожніх знаків|Штраф 1250 ₴',
+ '1.3 Перевищення швидкості|Штраф 2000 ₴',
+ '1.4 Їзда по зустрічній смузі без RP-причини|Штраф 2500 ₴',
+ '1.5 Небезпечні маневри між смугами|Штраф 2000 ₴',
+ '1.6 Створення ДТП з виною гравця|Штраф 4000 ₴',
+ '1.7 Втеча з місця ДТП|Штраф 7000 ₴',
+ '1.8 Паркування у забороненому місці (парковки держустанов, автобусні зупинки, тротуари, мости, клумби, посеред дороги, перед шлагбаумами, біля пожежних гідрантів)|Штраф 1000 ₴',
+ '1.9 Ігнорування вимоги поліції зупинитися|Штраф 3500 ₴',
+ '1.10 Невикористання поворотника|Штраф 1500 ₴',
+ '1.11 Різка зміна смуги без сигналу|Штраф 1500 ₴',
+ '1.12 Аварійна сигналізація без причини|Штраф 2225 ₴',
+ '1.13 Рух без фар з 18:00 до 7:00 або при поганій видимості (туман, дощ, сніг)|Штраф 2300 ₴',
+ '1.14 Рух у темний час доби лише з габаритами|Штраф 1500 ₴',
+ '1.15 Навмисне вимкнення світла для уникнення погоні|Штраф 2500 ₴',
+ '1.16 Не поступитися дорогою службовим машинам (пожежні, медичні, поліцейські, адмін-кар)|Штраф 2000 ₴',
+ '1.17 Поворот не з тієї смуги (де можна повернути, є розмітка; екстрених служб не стосується)|Штраф 1000 ₴',
+ '1.18 З пробитим колесом їхати можна лише до 30 км/год і на аварійці. Краще викликати ремонтну службу.|Штраф 2000 ₴'
+]),
+mk('Кримінальний кодекс',[
+ '<b>КК-101 Пограбування Головного Банку.</b> Проникнення до сховища, крадіжка грошей, співучасть (охорона входу, авто для втечі). Поліція: спецпідрозділ для штурму, патруль для оточення; при збройному опорі вогонь на ураження.|Затримання, вилучення награбованого, суд (за ПК)',
+ '<b>КК-102 Ювелірний магазин / Клуб / Порт.</b> Злам вітрин, сейфа чи контейнера, крадіжка майна. Негайне оточення, штурм спецпідрозділом.|Арешт і суд (за ПК)',
+ '<b>КК-103 Каса магазину або заправки.</b>|Затримання, арешт, суд',
+ '<b>КК-104 Злам автоматів.</b> Технічні засоби для крадіжки енергетиків/печива з вуличних автоматів.|Затримання, арешт, суд (за ПК)',
+ '<b>КК-201 Відкрите носіння зброї.</b> Заборонено тримати зброю в руках у громадських місцях без очевидної загрози життю. Поліція бере на приціл і наказує прибрати зброю; спроба навести на поліцію дає вогонь на ураження.|Арешт, вилучення зброї, суд (за ПК)',
+ '<b>КК-202 Посягання на життя працівника держструктур.</b> Вогонь по поліції, сбу/корд на службі. Працівники мають право відкрити вогонь у відповідь без попередження; ті, що вижили, — в кайданки.|Передача справи до суду (за ПК)',
+ '<b>КК-203 Захоплення заручників.</b> Спершу пауза в стрільбі та переговори, у разі провалу тактичний штурм сбу/корд.|Арешт усіх учасників, суд (за ПК)',
+ '<b>КК-204 Втеча від поліції.</b> Ухилення після законної вимоги зупинитися, ігнорування спецсигналів.|Затримання, арешт, суд',
+ '<b>КК-205 Незаконні предмети.</b> Носіння, демонстрація чи використання для злочину або погрози.|Вилучення, арешт, суд',
+ '<b>КК-206 Пошкодження майна.</b> Умисне пошкодження службового, цивільного чи чужого транспорту та RP-об’єктів.|Арешт і суд'
+]),
+mk('Адміністративний кодекс',[
+ 'Покарання за АК — лише грошовий штраф. До в’язниці не саджають, тазер і кайданки до цивільних без розшуку не застосовуються.',
+ '<b>АК-101 Хуліганство.</b> Образи, крики, гучна музика в громадських місцях, стрибки по чужих авто, провокування конфліктів.|Усне попередження, далі штраф до 2000 ₴',
+ '<b>АК-102 Хибний виклик екстрених служб.</b>|Штраф 3000 ₴',
+ '<b>АК-201 Непокора поліції.</b> Відмова показати документи, вийти з авто чи відійти від місця аварії.|Штраф до 4000 ₴',
+ '📌 Якщо порушник продовжує одразу після сплати штрафу, працівник викликає по рації іншого офіцера для повторного штрафу (ліміт банку на часті перекази).',
+ '<b>АК-202 Проникнення на закриту територію.</b> Закрита парковка поліції, дах дільниці, зони появи екстрених служб, місця подій, огороджені конусами. База СБУ-КОРД і місця штурмів — закриті зони; КОРД викликає патрульних для максимального штрафу.|Штраф 3000 ₴',
+ '<b>АК-203 Перешкоджання екстреним службам.</b> Блокування проїзду, заважання медичній допомозі, гасінню, оточенню чи затриманню. Якщо блокується спецоперація чи КПП, викликають Дорожню поліцію, HARS або адміністрацію; силове звільнення проїзду лише в крайньому разі.|Штраф 2500 ₴',
+ '<b>АК-203 (дод.) Переслідування гравця</b> заборонене як порушення права на недоторканність приватного життя.'
+]),
+mk('Поліція I. Загальні положення',[
+ '<b>ПОЛ-101</b> Поліція — державна RP-фракція: порядок у місті, виклики, затримання, охорона громадян, дотримання законів.|'+DG,
+ '<b>ПОЛ-102</b> Підрозділи: Патрульна служба, Дорожня поліція, КОРД. Не підміняють один одного без причини.|'+DG,
+ '<b>ПОЛ-103</b> Знати правила, RP-терміни, Процесуальний, Кримінальний, Адміністративний та Дорожній кодекси.|'+DG,
+ '<b>ПОЛ-104</b> Наказ старшого не вищий за правила, кодекси, рішення суду чи адміністрації.|'+ZV,
+ '<b>ПОЛ-105</b> Виконувати законні накази старших за званням і керівництва.|'+DG
+]),
+mk('Поліція II. Поведінка',[
+ '<b>ПОЛ-201</b> Спілкування спокійне, шанобливе, без образ.|'+DG,
+ '<b>ПОЛ-202</b> Заборонено принижувати, провокувати, погрожувати посадою, тиснути формою.|'+DG,
+ '<b>ПОЛ-203</b> Заборонено NonRP Cop: арешт без причини, штраф без пояснення, сила без підстав.|'+ZV,
+ '<b>ПОЛ-204</b> Заборонено використовувати посаду заради грошей, друзів, помсти чи вигоди.|'+ZV,
+ '<b>ПОЛ-205</b> Заборонено хабарі, продаж захисту, відпуск порушників за гроші, передачу інформації злочинцям.|'+ZV
+]),
+mk('Поліція III. Транспорт і спецсигнали',[
+ '<b>ПОЛ-301</b> Службовий транспорт лише для роботи: патрулювання, виклики, переслідування, операції, КПП, супровід.|'+DG,
+ '<b>ПОЛ-302</b> Заборонено використовувати для розваг, перегонів, особистих поїздок, хизування, перевезення друзів без RP-причини.|'+DG,
+ '<b>ПОЛ-303</b> Заборонено їздити, стояти чи пересуватися з маячками й сиреною без службової причини.|'+DG,
+ '<b>ПОЛ-304</b> Спецсигнали дозволені: виклик, переслідування, трафік-стоп, оточення, штурм, КПП, супровід, ДТП, пожежа, загроза життю, термінове прибуття.|'+DG,
+ '<b>ПОЛ-305</b> Заборонено вмикати їх заради розваги, уваги чи провокації без активного RP-завдання.|'+DG
+]),
+mk('Поліція IV. Застосування сили',[
+ '<b>ПОЛ-401</b> Зброя лише за загрози життю, збройного опору чи нападу.|'+ZV,
+ '<b>ПОЛ-402</b> Заборонено стріляти по гравцях, транспорту чи в повітря без службової причини.|'+ZV,
+ '<b>ПОЛ-403</b> Тазер і кайданки лише під час затримання, опору, втечі чи загрози безпеці.|'+DG,
+ '<b>ПОЛ-404</b> Заборонено Cuff Rush: кайданки без причини, попередження чи фіксації порушення.|'+ZV,
+ '<b>ПОЛ-405</b> Силове затримання лише при порушенні КК, активному опорі, загрозі життю, переслідуванні чи збройній ситуації.|'+ZV
+]),
+mk('Поліція V. Затримання та суд',[
+ '<b>ПОЛ-501</b> Працівник має зрозумілу причину для затримання.|'+DG,
+ '<b>ПОЛ-502</b> Затримання за КК виконується за Процесуальним кодексом.|'+DG,
+ '<b>ПОЛ-503</b> Права затриманого зачитуються під час оформлення чи конвоювання (правило Міранди).|'+DG,
+ '<b>ПОЛ-504</b> Заборонено Auto Jail: затримати і одразу відправити до в’язниці без процедури.|'+ZV,
+ '<b>ПОЛ-505</b> При передачі затриманого іншим підрозділом прийняти причину й статті, оформити дії за ПК.|'+DG
+]),
+mk('Поліція VI. Штрафи та перевірки',[
+ '<b>ПОЛ-601</b> Штрафи за АК лише за дрібні порушення громадського порядку.|'+DG,
+ '<b>ПОЛ-602</b> Штрафи за ДК оформлює Дорожня поліція. Патруль лише якщо порушення сталося прямо перед працівником і створило загрозу.|'+DG,
+ '<b>ПОЛ-603</b> Працівник називає причину і статтю штрафу. Мовчазні штрафи заборонені.|'+DG,
+ '<b>ПОЛ-604</b> Перевірка документів лише за причини: порушення, орієнтування, закрита територія, КПП, підозра за RP-ситуацією.|'+DG
+]),
+mk('Поліція VII–VIII. Підрозділи та операції',[
+ '<b>ПОЛ-701</b> Патрульна служба: порядок у місті, виклики, адмін-порушення, затримання, передача справ до суду.|'+DG,
+ '<b>ПОЛ-702</b> Дорожня поліція: ПДР, КПП, трафік-стопи, евакуація, безпека на дорогах.|'+DG,
+ '<b>ПОЛ-703</b> СБУ/КОРД: штурми, збройні загрози, рейди, оточення, небезпечні операції.|'+DG,
+ '<b>ПОЛ-704</b> СБУ/КОРД не займається штрафами, Дорожня поліція не проводить штурми без крайньої потреби, Патруль не підміняє інші підрозділи.|'+DG,
+ '<b>ПОЛ-801</b> На великій операції призначається старший: порядок, команди, координація.|'+DG,
+ '<b>ПОЛ-802</b> Поліція може оточити територію при ДТП, пожежі, штурмі, пограбуванні, КПП чи іншій небезпеці.|'+DG,
+ '<b>ПОЛ-803</b> Спершу вимагати залишити зону; у разі відмови громадянин оформлюється за АК.|'+DG,
+ '<b>ПОЛ-804</b> Заборонено перетворювати операцію на масову стрілянину, безлад, крики, випадкові затримання.|'+ZV
+]),
+mk('Поліція IX–X. Рапорти та взаємодія',[
+ '<b>ПОЛ-901</b> Важливі дії (затримання, штурми, великі переслідування, ордери, скарги, спірні ситуації) оформлюються рапортом.|'+DG,
+ '<b>ПОЛ-902</b> Немає рапорту — керівництво може не враховувати слова працівника як підтвердження дії.|'+DG,
+ '<b>ПОЛ-903</b> Мати підстави для затримання, штрафу, сили чи передачі справи до суду.|'+DG,
+ '<b>ПОЛ-1001</b> Співпрацювати з адміністрацією під час скарг, порушень, багів і спірних RP-ситуацій.|'+DG,
+ '<i>ПОЛ-1002 «Взаємодія із судом» у наданому тексті обірвано. Надішліть продовження, і я додам.</i>'
+])
+].map((r,i)=>({...r,id:'r'+i}));
+
+function renderHomeRules(){
+    const grid = document.getElementById('home-rules-grid');
+    if (!grid) return;
+    grid.innerHTML = HOME_RULES.map((r,i)=>`
+        <div class="menu-item" data-title="${r.title.toLowerCase()}" onclick="openHomeRule('${r.id}')">
+            <div class="item-number"><b>${i+1}</b></div><b><span>${r.title}</span></b>
+        </div>`).join('');
+}
+function openHomeRule(id){
+    const r = HOME_RULES.find(x=>x.id===id); if(!r) return;
+    document.getElementById('ruleModalBody').innerHTML = r.html;
+    document.getElementById('ruleModal').classList.add('open');
+}
+function closeRuleModal(){ document.getElementById('ruleModal').classList.remove('open'); }
+
+function filterHomeRules(){
+    const q = document.getElementById('home-rules-search').value.toLowerCase().trim();
+    let any = false;
+    document.querySelectorAll('#home-rules-grid .menu-item').forEach((el,i)=>{
+        const r = HOME_RULES[i];
+        const text = (r.title + ' ' + r.html.replace(/<[^>]+>/g,' ')).toLowerCase();
+        const hit = !q || text.includes(q);
+        el.style.display = hit ? '' : 'none';
+        if (hit) any = true;
+    });
+    document.getElementById('home-rules-empty').style.display = any ? 'none' : 'block';
+}
+
+
+
+
+
+
+/* ===== ДРУК ЗАГОЛОВКА ===== */
+(function(){
+    const el = document.getElementById('typed-title');
+    if (!el) return;
+    const part1 = 'ВІТАЄМО В ';
+    const part2 = 'ELITE RP!';
+    const speed = 90;      // мс на одну літеру
+    const startDelay = 500; // пауза перед початком
+    let i = 0;
+
+    const span = document.createElement('span');
+
+    function type(){
+        if (i < part1.length) {
+            el.insertBefore(document.createTextNode(part1[i]), span.parentNode ? span : null);
+        } else {
+            if (!span.parentNode) el.appendChild(span);
+            span.textContent += part2[i - part1.length];
+        }
+        i++;
+        if (i < part1.length + part2.length) setTimeout(type, speed);
+    }
+    setTimeout(type, startDelay);
+})();
+/* ===== ОНОВЛЕННЯ ===== */
+const UPDATES = [
+  {
+    id: 'u21', ver: '2.1', tag: 'СКОРО', date: 'Скоро буде',
+    title: 'Оновлення 2.1',
+    desc: 'Новий сайт, Telegram-канал, оновлені та нові будівлі.',
+    sections: [
+      { icon: 'fa-globe', color: '#f3a82e', title: 'Оновлення сайту', items: [
+        'Повністю оновлений дизайн порталу: шапка-«пілюля», скляні блоки та плавні анімації.',
+        'Нова система правил: зручні картки з пошуком по всіх пунктах.',
+        'Анкети у фракції, журнал дій та історія обзвонів.',
+        'Техпідтримка зі статусами звернень і сповіщеннями.',
+        'Покращена адаптація під телефони.'
+      ]},
+      { icon: 'fa-paper-plane', color: '#37aee2', title: 'Оновлення ТГК', items: [
+        'Оновлений Telegram-канал Elite RP з красивим оформленням.',
+        'Усі новини, івенти та оголошення тепер в одному місці.',
+        'Швидкий зв’язок із адміністрацією та спільнотою.'
+      ]},
+      { icon: 'fa-building', color: '#ff7700', title: 'Оновлення будівель', items: [
+        'Покращено вигляд та інтер’єри наявних будівель.',
+        'Виправлено помилки та недоліки в локаціях.',
+        'Оптимізація для стабільнішої роботи сервера.'
+      ]},
+      { icon: 'fa-city', color: '#2ecc71', title: 'Нові будівлі', items: [
+        'У місті з’явились нові будівлі для фракцій та цивільних.',
+        'Нові місця для RP-ситуацій, подій та івентів.',
+        'Деталі та розташування — дивіться вже на сервері!'
+      ]}
+       ]
+  },
+  {
+  id: 'u14', ver: '1.4', tag: 'NEW', date: 'Вже на сайті',
+  title: 'SEO 1.4',
+  desc: 'Elite RP стає ближчим до гравців: усі можливості порталу для ролей Гравець і Лідер фракції.',
+  sections: [
+    { icon: 'fa-user', color: '#f3a82e', title: 'Акаунт гравця', items: [
+      'Реєстрація та вхід за нікнеймом і паролем.',
+      'Особистий профіль: аватарка за посиланням або фото з галереї.',
+      'Власний колір неонової підсвітки головного банера.',
+      'Роль відображається біля нікнейму в шапці сайту.',
+      'Щоденне печиво з передбаченням: нове кожного дня.'
+    ]},
+    { icon: 'fa-book', color: '#2ecc71', title: 'Правила та сервер', items: [
+      'Повний звід правил: адміністрація, RP-терміни, ПДР, КК, АК та статут поліції.',
+      'Кожен розділ відкривається в окремому вікні з покараннями та штрафами.',
+      'Швидкий пошук по всіх пунктах правил.',
+      'Інструкція, як зайти на сервер, і код приватного сервера одним натиском.',
+      'Пряме посилання на гру в Roblox.'
+    ]},
+    { icon: 'fa-users', color: '#13a8b3', title: 'Фракції та анкети', items: [
+      'Список фракцій із описом, лідером і його Discord.',
+      'Ієрархія державних органів: від керівництва до стажерів.',
+      'Анкета на вступ у фракцію з 11 питаннями, доступна для фракцій із лідером.',
+      'Сповіщення про рішення: схвалено або відхилено, із причиною відмови.'
+    ]},
+    { icon: 'fa-headset', color: '#0072ff', title: 'Техпідтримка', items: [
+      'Звернення до тех. адміністратора через форму з вашим Discord.',
+      'Розділ «Мої звернення» зі статусами: очікує, є відповідь, схвалено, відхилено.',
+      'Червоне сповіщення на кнопці чату, коли прийшла відповідь.',
+      'Можливість підтримати розробку порталу донатом.'
+    ]},
+    { icon: 'fa-clipboard-check', color: '#8e44ad', title: 'Лідер фракції', items: [
+      'Особлива роль «Лідер Фракції» з унікальним значком.',
+      'Окрема кнопка «Перевірка анкет у фракцію» на головній сторінці.',
+      'Лічильник нових анкет на кнопці та біля кожної фракції.',
+      'Вкладки анкет: очікування, відхилені та схвалені.',
+      'Повна анкета кандидата: відповіді, аватарка, ролі та дата подачі.',
+      'Схвалення в один клік або відхилення з обов’язковою причиною.',
+      'Рішення потрапляє в журнал дій і одразу доходить до гравця.'
+    ]},
+    { icon: 'fa-magnifying-glass', color: '#ff7700', title: 'SEO та зручність', items: [
+      'Оновлені заголовки й описи сторінок для пошуку.',
+      'Красиве прев’ю посилання в Telegram та Discord.',
+      'Кнопки Telegram і Discord, соцмережі в шапці.',
+      'Друк заголовка та плавні анімації.',
+      'Повна адаптація під телефони.',
+      'Під час обзвону сайт тимчасово блокується для гравців заради конфіденційності.'
+    ]}
+  ]
+}
+  // Наступне оновлення додавайте сюди ↑ (через кому)
+];
+
+function openUpdatesModal(){
+  document.getElementById('upd-list').innerHTML = UPDATES.map((u, i) => `
+    <div class="upd-card" style="animation-delay:${i * .1}s" onclick="showUpdateDetail('${u.id}')">
+      <div class="upd-ver"><small>ver</small>${u.ver}</div>
+      <div class="upd-info">
+        <div class="upd-name">${u.title}${u.tag ? `<span class="upd-new">${u.tag}</span>` : ''}</div>
+        <div class="upd-desc">${u.desc}</div>
+        <div class="upd-tags">
+          ${u.sections.map(s => `<span class="upd-tag" style="--c:${s.color}"><i class="fa-solid ${s.icon}"></i>${s.title}</span>`).join('')}
+        </div>
+      </div>
+      <i class="fa-solid fa-chevron-right upd-arrow"></i>
+    </div>`).join('');
+  backToUpdatesList();
+  document.getElementById('updatesModal').style.display = 'flex';
+}
+function closeUpdatesModal(){ document.getElementById('updatesModal').style.display = 'none'; }
+function backToUpdatesList(){
+  document.getElementById('updDetailScreen').style.display = 'none';
+  document.getElementById('updListScreen').style.display = 'block';
+}
+function showUpdateDetail(id){
+  const u = UPDATES.find(x => x.id === id); if(!u) return;
+  const total = u.sections.reduce((n, s) => n + s.items.length, 0);
+  document.getElementById('upd-detail').innerHTML = `
+    <div class="upd-hero">
+      <span class="upd-soon">${u.tag || 'Оновлення'}</span>
+      <div class="upd-hero-ver">${u.ver}</div>
+      <div class="upd-hero-title">${u.title}</div>
+      <div class="upd-hero-date"><i class="fa-regular fa-clock"></i> ${u.date}</div>
+      <div class="upd-stats">
+        <div class="upd-stat"><b>${u.sections.length}</b><span>розділи</span></div>
+        <div class="upd-stat"><b>${total}</b><span>змін</span></div>
+      </div>
+    </div>
+    <div class="upd-grid">
+      ${u.sections.map((s, i) => `
+        <div class="upd-sec" style="--c:${s.color};animation-delay:${i * .12}s">
+          <div class="upd-sec-num">0${i + 1}</div>
+          <h4><span class="upd-sec-ico"><i class="fa-solid ${s.icon}"></i></span>${s.title}</h4>
+          <ul>${s.items.map(t => `<li>${t}</li>`).join('')}</ul>
+        </div>`).join('')}
+    </div>
+    <div class="upd-foot">Дякуємо, що ви з Elite RP! 💛</div>`;
+  document.getElementById('updListScreen').style.display = 'none';
+  document.getElementById('updDetailScreen').style.display = 'block';
+  document.getElementById('updDetailScreen').scrollTop = 0;
+}
+function setAuthTab(m){
+    document.getElementById('tab-login').classList.toggle('active', m === 'login');
+    document.getElementById('tab-reg').classList.toggle('active', m === 'reg');
+}
+/* ===== ПЛАВНА ПОЯВА БЛОКУ ПРИ ПРОКРУТЦІ ===== */
+renderHomeRules();
+(function(){
+    const els = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window)) { els.forEach(e=>e.classList.add('visible')); return; }
+    const io = new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } }), {threshold:.12});
+    els.forEach(e=>io.observe(e));
+})();
+document.addEventListener('keydown', e=>{ if(e.key==='Escape'){ closeCookie(); closeRuleModal(); closeUpdatesModal(); } });
+    </script>
+    <script>
+(function(){
+  // створюємо модалку самі, щоб не залежати від місця вставки HTML
+  const old = document.getElementById('updatesModal');
+  if (old) old.remove();
+  const modal = document.createElement('div');
+  modal.id = 'updatesModal';
+  modal.className = 'modal-overlay';
+  modal.innerHTML = `
+    <div class="modal-box">
+      <button type="button" class="modal-close" data-upd-close>&times;</button>
+      <div id="updListScreen" class="upd-screen">
+        <div class="upd-top">
+          <div class="modal-icon"><i class="fa-solid fa-rocket"></i></div>
+          <div class="upd-kicker">Elite RP • Новини проєкту</div>
+          <div class="upd-h">Оновлення</div>
+        </div>
+        <div class="upd-timeline" id="upd-list"></div>
+      </div>
+      <div id="updDetailScreen" class="upd-screen" style="display:none">
+        <div id="upd-detail"></div>
+        <div class="upd-back">
+          <button type="button" class="btn-back-factions" data-upd-back><i class="fa-solid fa-arrow-left"></i> До списку оновлень</button>
+        </div>
+      </div>
+    </div>`;
+  document.body.appendChild(modal);
+
+  const $ = id => document.getElementById(id);
+
+  function renderList(){
+    $('upd-list').innerHTML = UPDATES.map((u, i) => `
+      <div class="upd-card" data-upd-id="${u.id}" style="animation-delay:${i * .1}s">
+        <div class="upd-ver"><small>ver</small>${u.ver}</div>
+        <div class="upd-info">
+          <div class="upd-name">${u.title}${u.tag ? `<span class="upd-new">${u.tag}</span>` : ''}</div>
+          <div class="upd-desc">${u.desc}</div>
+          <div class="upd-tags">
+            ${u.sections.map(s => `<span class="upd-tag" style="--c:${s.color}"><i class="fa-solid ${s.icon}"></i>${s.title}</span>`).join('')}
+          </div>
+        </div>
+        <i class="fa-solid fa-chevron-right upd-arrow"></i>
+      </div>`).join('');
+  }
+
+  function showList(){
+    $('updDetailScreen').style.display = 'none';
+    $('updListScreen').style.display = 'block';
+  }
+
+  function showDetail(id){
+    const u = UPDATES.find(x => x.id === id); if (!u) return;
+    const total = u.sections.reduce((n, s) => n + s.items.length, 0);
+    $('upd-detail').innerHTML = `
+      <div class="upd-hero">
+        <span class="upd-soon">${u.tag || 'Оновлення'}</span>
+        <div class="upd-hero-ver">${u.ver}</div>
+        <div class="upd-hero-title">${u.title}</div>
+        <div class="upd-hero-date"><i class="fa-regular fa-clock"></i> ${u.date}</div>
+        <div class="upd-stats">
+          <div class="upd-stat"><b>${u.sections.length}</b><span>розділи</span></div>
+          <div class="upd-stat"><b>${total}</b><span>змін</span></div>
+        </div>
+      </div>
+      <div class="upd-grid">
+        ${u.sections.map((s, i) => `
+          <div class="upd-sec" style="--c:${s.color};animation-delay:${i * .12}s">
+            <div class="upd-sec-num">0${i + 1}</div>
+            <h4><span class="upd-sec-ico"><i class="fa-solid ${s.icon}"></i></span>${s.title}</h4>
+            <ul>${s.items.map(t => `<li>${t}</li>`).join('')}</ul>
+          </div>`).join('')}
+      </div>
+      <div class="upd-foot">Дякуємо, що ви з Elite RP! 💛</div>`;
+    $('updListScreen').style.display = 'none';
+    $('updDetailScreen').style.display = 'block';
+    $('updDetailScreen').scrollTop = 0;
+  }
+
+  function openModal(){ renderList(); showList(); modal.style.display = 'flex'; }
+  function closeModal(){ modal.style.display = 'none'; }
+
+  // сумісність зі старими onclick="openUpdatesModal()"
+  window.openUpdatesModal = openModal;
+  window.closeUpdatesModal = closeModal;
+
+  document.addEventListener('click', e => {
+    if (e.target.closest('.btn-updates')) { openModal(); return; }
+    if (e.target === modal || e.target.closest('[data-upd-close]')) { closeModal(); return; }
+    if (e.target.closest('[data-upd-back]')) { showList(); return; }
+    const card = e.target.closest('[data-upd-id]');
+    if (card) showDetail(card.getAttribute('data-upd-id'));
+  });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+})();
+</script>
+</body>
+</html>
